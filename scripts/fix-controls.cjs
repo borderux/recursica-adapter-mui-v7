@@ -9,12 +9,14 @@ let modifiedCount = 0;
 
 for (const sourceFile of files) {
   let modified = false;
-  
+
   // Find const meta = ...
   const metaDecl = sourceFile.getVariableDeclaration("meta");
   if (!metaDecl) continue;
 
-  const init = metaDecl.getInitializerIfKind(SyntaxKind.ObjectLiteralExpression);
+  const init = metaDecl.getInitializerIfKind(
+    SyntaxKind.ObjectLiteralExpression,
+  );
   if (!init) continue;
 
   const parametersProp = init.getProperty("parameters");
@@ -31,9 +33,11 @@ for (const sourceFile of files) {
   // Gather args
   const argsProp = init.getProperty("args");
   if (argsProp && argsProp.isKind(SyntaxKind.PropertyAssignment)) {
-    const argsInit = argsProp.getInitializerIfKind(SyntaxKind.ObjectLiteralExpression);
+    const argsInit = argsProp.getInitializerIfKind(
+      SyntaxKind.ObjectLiteralExpression,
+    );
     if (argsInit) {
-      argsInit.getProperties().forEach(p => {
+      argsInit.getProperties().forEach((p) => {
         if (p.isKind(SyntaxKind.PropertyAssignment)) {
           keysToInclude.add(p.getName());
         }
@@ -44,16 +48,29 @@ for (const sourceFile of files) {
   // Gather argTypes
   const argTypesProp = init.getProperty("argTypes");
   if (argTypesProp && argTypesProp.isKind(SyntaxKind.PropertyAssignment)) {
-    const argTypesInit = argTypesProp.getInitializerIfKind(SyntaxKind.ObjectLiteralExpression);
+    const argTypesInit = argTypesProp.getInitializerIfKind(
+      SyntaxKind.ObjectLiteralExpression,
+    );
     if (argTypesInit) {
-      argTypesInit.getProperties().forEach(p => {
+      argTypesInit.getProperties().forEach((p) => {
         if (p.isKind(SyntaxKind.PropertyAssignment)) {
           keysToInclude.add(p.getName());
         } else if (p.isKind(SyntaxKind.SpreadAssignment)) {
-           const text = p.getExpression().getText();
-           if (text === "formControlArgTypes") {
-             ["formLayout", "labelSize", "labelAlignment", "labelOptionalText", "labelWithEditIcon", "error", "assistiveText", "required", "readOnly", "id"].forEach(k => keysToInclude.add(k));
-           }
+          const text = p.getExpression().getText();
+          if (text === "formControlArgTypes") {
+            [
+              "formLayout",
+              "labelSize",
+              "labelAlignment",
+              "labelOptionalText",
+              "labelWithEditIcon",
+              "error",
+              "assistiveText",
+              "required",
+              "readOnly",
+              "id",
+            ].forEach((k) => keysToInclude.add(k));
+          }
         }
       });
     }
@@ -77,17 +94,19 @@ for (const sourceFile of files) {
   if (!parametersProp) {
     init.addPropertyAssignment({
       name: "parameters",
-      initializer: `{\n    controls: {\n      include: ${includeArrayStr},\n    },\n  }`
+      initializer: `{\n    controls: {\n      include: ${includeArrayStr},\n    },\n  }`,
     });
     modified = true;
   } else if (parametersProp.isKind(SyntaxKind.PropertyAssignment)) {
-    const pInit = parametersProp.getInitializerIfKind(SyntaxKind.ObjectLiteralExpression);
+    const pInit = parametersProp.getInitializerIfKind(
+      SyntaxKind.ObjectLiteralExpression,
+    );
     if (pInit) {
       const controlsProp = pInit.getProperty("controls");
       if (!controlsProp) {
         pInit.addPropertyAssignment({
           name: "controls",
-          initializer: `{\n      include: ${includeArrayStr},\n    }`
+          initializer: `{\n      include: ${includeArrayStr},\n    }`,
         });
         modified = true;
       }
