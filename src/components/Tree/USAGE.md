@@ -1,6 +1,6 @@
 # Tree - Usage Guide
 
-This document describes how to integrate and use the `Tree` component in your projects using `@recursica/mui-adapter`.
+This document describes how to integrate and use the `Tree` component in your projects using `@recursica/adapter-mui-v7`.
 
 > [!IMPORTANT]
 > This component requires `@mui/x-tree-view` (MIT-licensed, free community edition) as a peer dependency, in addition to `@mui/material`. Install it alongside your other MUI packages: `npm install @mui/x-tree-view`.
@@ -10,7 +10,7 @@ This document describes how to integrate and use the `Tree` component in your pr
 ## 1. Import Reference
 
 ```tsx
-import { Tree } from "@recursica/mui-adapter";
+import { Tree } from "@recursica/adapter-mui-v7";
 ```
 
 ---
@@ -19,7 +19,7 @@ import { Tree } from "@recursica/mui-adapter";
 
 ```tsx
 import React from "react";
-import { Tree } from "@recursica/mui-adapter";
+import { Tree } from "@recursica/adapter-mui-v7";
 
 export default function Demo() {
   return (
@@ -83,7 +83,7 @@ Expanding/collapsing and selecting are independent, fixed interactions (not prop
 
 ## 4. Design System Integration
 
-All Recursica components in the `@recursica/mui-adapter` package adhere strictly to design system spacing, scaling, and behavior patterns.
+All Recursica components in the `@recursica/adapter-mui-v7` package adhere strictly to design system spacing, scaling, and behavior patterns.
 
 > [!IMPORTANT]
 >

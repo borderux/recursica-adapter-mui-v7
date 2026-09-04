@@ -1,6 +1,6 @@
 # Layer - Usage Guide
 
-This document describes how to integrate and use the `Layer` component in your projects using `@recursica/mui-adapter`.
+This document describes how to integrate and use the `Layer` component in your projects using `@recursica/adapter-mui-v7`.
 
 > [!NOTE] > `Layer` is defined once in `@recursica/adapter-common` and re-exported here so it shares the exact same behavior across every Recursica adapter.
 
@@ -9,7 +9,7 @@ This document describes how to integrate and use the `Layer` component in your p
 ## 1. Import Reference
 
 ```tsx
-import { Layer } from "@recursica/mui-adapter";
+import { Layer } from "@recursica/adapter-mui-v7";
 ```
 
 ---
@@ -19,7 +19,7 @@ import { Layer } from "@recursica/mui-adapter";
 `Layer` sets `data-recursica-layer` on its root element, which is what makes the theme+layer scoped CSS variables (surface color, border, elevation, padding) in `recursica_variables_scoped.css` actually apply. [`RecursicaThemeProvider`](../RecursicaThemeProvider/USAGE.md) automatically wraps your app in a `layer={0}` `Layer` by default (via its `initLayer0` prop), so you don't need to add one yourself for the base page. You still add `Layer`s manually for anything visually elevated above the page background:
 
 ```tsx
-import { RecursicaThemeProvider, Layer, Card } from "@recursica/mui-adapter";
+import { RecursicaThemeProvider, Layer, Card } from "@recursica/adapter-mui-v7";
 
 function App() {
   return (

@@ -1,6 +1,6 @@
 # Typography – Implementation Notes
 
-`Typography` is the shared rendering base for both `Text` and `Heading` in mui-adapter — anything
+`Typography` is the shared rendering base for both `Text` and `Heading` in adapter-mui-v7 — anything
 applied here reaches both components.
 
 ## `.root` `text-wrap: balance` (Matt Massey, 2026-08-28)

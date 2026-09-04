@@ -21,7 +21,6 @@ export default defineConfig(({ mode }) => {
               insertTypesEntry: true,
               exclude: ["**/*.stories.*", ".storybook/**"],
               rollupTypes: true,
-              bundledPackages: ["@recursica/adapter-common"],
             }),
           ]
         : []),
@@ -52,7 +51,7 @@ export default defineConfig(({ mode }) => {
               name: "RecursicaMUIAdapter",
               formats: ["es", "cjs"],
               fileName: (format) =>
-                `mui-adapter.${format === "es" ? "js" : "cjs"}`,
+                `adapter-mui-v7.${format === "es" ? "js" : "cjs"}`,
             },
             rollupOptions: {
               external: [

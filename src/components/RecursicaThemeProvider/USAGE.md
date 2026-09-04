@@ -1,6 +1,6 @@
 # RecursicaThemeProvider - Usage Guide
 
-This document describes how to integrate and use `RecursicaThemeProvider` in your projects using `@recursica/mui-adapter`.
+This document describes how to integrate and use `RecursicaThemeProvider` in your projects using `@recursica/adapter-mui-v7`.
 
 > [!NOTE] > `RecursicaThemeProvider` is defined once in `@recursica/adapter-common` and re-exported here so it shares the exact same behavior across every Recursica adapter.
 
@@ -9,7 +9,7 @@ This document describes how to integrate and use `RecursicaThemeProvider` in you
 ## 1. Import Reference
 
 ```tsx
-import { RecursicaThemeProvider } from "@recursica/mui-adapter";
+import { RecursicaThemeProvider } from "@recursica/adapter-mui-v7";
 ```
 
 ---
@@ -18,7 +18,7 @@ import { RecursicaThemeProvider } from "@recursica/mui-adapter";
 
 ```tsx
 import { StyledEngineProvider } from "@mui/material/styles";
-import { RecursicaThemeProvider } from "@recursica/mui-adapter";
+import { RecursicaThemeProvider } from "@recursica/adapter-mui-v7";
 
 function App() {
   return (
@@ -36,7 +36,7 @@ By default, `RecursicaThemeProvider` also wraps `children` in a base [`Layer`](.
 If you want to place the base layer yourself (e.g. to use `contentsOnly`, or to control exactly where layer 0 starts in the tree), opt out with `initLayer0={false}`:
 
 ```tsx
-import { RecursicaThemeProvider, Layer } from "@recursica/mui-adapter";
+import { RecursicaThemeProvider, Layer } from "@recursica/adapter-mui-v7";
 
 <RecursicaThemeProvider theme="light" initLayer0={false}>
   <Layer layer={0}>{/* Your App Components */}</Layer>

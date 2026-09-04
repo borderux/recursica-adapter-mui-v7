@@ -25,7 +25,7 @@ import styles from "./Switch.module.css";
 import { SwitchGroup, SwitchGroupContext } from "./SwitchGroup";
 
 // Same glyphs as mantine-adapter's Switch (re-exported from @mantine/core's CheckIcon/CloseIcon,
-// not importable here since mui-adapter doesn't depend on @mantine/core) — kept pixel-identical
+// not importable here since adapter-mui-v7 doesn't depend on @mantine/core) — kept pixel-identical
 // so adapter-tester's cross-adapter diff stays clean. Same precedent as Checkbox's inline icons.
 function CheckIcon(props: React.ComponentProps<"svg">) {
   return (

@@ -88,7 +88,7 @@ explicit `checked` prop: `isGrouped = groupContext !== null && restRecord.checke
 A checkbox with its own `checked` (like `TransferList`'s rows) now always owns its source of truth;
 only checkboxes relying on `Checkbox.Group`'s array-tracking (no individual `checked`, matched by
 `value` — `CheckboxGroup.stories.tsx`'s usage) still defer to the group. Audited every
-`CheckboxGroup`/`Checkbox` pairing in mui-adapter (`CheckboxGroup.stories.tsx` and `TransferList`) —
+`CheckboxGroup`/`Checkbox` pairing in adapter-mui-v7 (`CheckboxGroup.stories.tsx` and `TransferList`) —
 no existing usage combines both an individual `checked` and group-array `value`, so this is a
 straight bug fix with no regression risk.
 

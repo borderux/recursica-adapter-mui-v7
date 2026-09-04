@@ -1,7 +1,7 @@
 # Stepper Implementation Notes
 
 - **Compositional API Dropped:** Mantine manages stepper state and content via `<Stepper.Step>` and `<Stepper.Completed>`. MUI delegates content rendering to the developer and focuses purely on the stepper visual layout using `<Step>`, `<StepLabel>`, etc.
-- **Monolithic API Adopted:** Following architectural review, we have abandoned the fabricated context wrappers for `mui-adapter`. We now natively export `Stepper`, `Step`, `StepLabel`, `StepButton`, and `StepConnector` wrapping their `@mui/material` counterparts. Developers are expected to manage the active step logic and content rendering outside the `Stepper` component, consistent with MUI patterns. Storybook tests have been updated to reflect this divergence while retaining core visual compatibility.
+- **Monolithic API Adopted:** Following architectural review, we have abandoned the fabricated context wrappers for `adapter-mui-v7`. We now natively export `Stepper`, `Step`, `StepLabel`, `StepButton`, and `StepConnector` wrapping their `@mui/material` counterparts. Developers are expected to manage the active step logic and content rendering outside the `Stepper` component, consistent with MUI patterns. Storybook tests have been updated to reflect this divergence while retaining core visual compatibility.
 
 ## Layout fixes (root-caused against mantine's visual reference)
 
@@ -87,7 +87,7 @@ from `mantine-adapter` that don't describe how MUI's Stepper actually works. Fix
   never asked to render one here).
 - **`Group`'s `gap`/margin-padding shorthand props silently multiplied by MUI's theme spacing
   unit:** the stepper story's `<Group mt={24} justify="center" gap={8}>` expects literal pixels
-  (matching mantine's `Group`, which takes raw numbers as-is), but `mui-adapter`'s `Group` passed
+  (matching mantine's `Group`, which takes raw numbers as-is), but `adapter-mui-v7`'s `Group` passed
   `gap` into `Stack`'s own `spacing` prop and spread `mt`/other margin-padding props straight onto
   `Stack`'s system props — both are MUI spacing shorthands that multiply bare numbers by the
   theme's 8px unit (`gap={8}` → 64px, `mt={24}` → 192px). This was the real cause of "Previous/
@@ -116,5 +116,5 @@ type { min-height: auto }` reset. Verified via live `getBoundingClientRect()` on
   the visual difference reported against mantine's rendering turned out to be a mantine-adapter
   bug (its `data-progress="completed"/"progress"/"pending"` value-matching selectors never
   matched Mantine's real boolean-presence attributes), not a missing/wrong Recursica variable
-  here. See `mantine-adapter`'s own `Stepper/IMPLEMENTATION_NOTES.md`. No mui-adapter change was
+  here. See `mantine-adapter`'s own `Stepper/IMPLEMENTATION_NOTES.md`. No adapter-mui-v7 change was
   needed for that item.

@@ -1,6 +1,5 @@
 {
   "$schema": "https://raw.githubusercontent.com/borderux/recursica/main/packages/adapter-tester/src/adapter-tester.schema.json",
-  "sourceOfTruth": { "type": "url", "cwd": "../mantine-adapter", "port": 6011 },
   "goldenThresholdPixels": 10,
   "sourceOfTruthThresholdPixels": 2500,
   "stories": {

@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document describes the high-level architecture and philosophy of the `@recursica/mui-adapter` package.
+This document describes the high-level architecture and philosophy of the `@recursica/adapter-mui-v7` package.
 
 ## Dependencies
 

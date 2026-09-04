@@ -20,7 +20,7 @@ This document contains specific design decisions, architectural constraints, and
 
 ## 3. Assistive Text Rendered as `<div>` Instead of `<span>`
 
-**Root cause:** `AssistiveElement.tsx` (mui-adapter) hardcoded a `<div>` around the children text; Mantine's equivalent uses a `<span>`. Not shared via `adapter-common` — each adapter has its own `AssistiveElement`.
+**Root cause:** `AssistiveElement.tsx` (adapter-mui-v7) hardcoded a `<div>` around the children text; Mantine's equivalent uses a `<span>`. Not shared via `adapter-common` — each adapter has its own `AssistiveElement`.
 
 **Fix:** Changed the inner text wrapper to a `<span>`. No CSS selector depended on the element type (`.text` is a class-only selector and remains a valid flex item as a span).
 

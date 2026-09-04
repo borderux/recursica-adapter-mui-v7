@@ -1,13 +1,13 @@
 # Tabs - Usage Guide
 
-This document describes how to integrate and use the `Tabs` component in your projects using `@recursica/mui-adapter`.
+This document describes how to integrate and use the `Tabs` component in your projects using `@recursica/adapter-mui-v7`.
 
 ---
 
 ## 1. Import Reference
 
 ```tsx
-import { Tabs, Tab, TabPanel } from "@recursica/mui-adapter";
+import { Tabs, Tab, TabPanel } from "@recursica/adapter-mui-v7";
 ```
 
 ---
@@ -28,7 +28,7 @@ beside it.
 ```tsx
 import React, { useState } from "react";
 import { TabContext } from "@mui/lab";
-import { Tabs, Tab, TabPanel, Flex } from "@recursica/mui-adapter";
+import { Tabs, Tab, TabPanel, Flex } from "@recursica/adapter-mui-v7";
 
 export default function Demo() {
   const [value, setValue] = useState("home");
@@ -52,7 +52,7 @@ export default function Demo() {
 
 ## 3. Design System Integration
 
-All Recursica components in the `@recursica/mui-adapter` package adhere strictly to design system spacing, scaling, and behavior patterns.
+All Recursica components in the `@recursica/adapter-mui-v7` package adhere strictly to design system spacing, scaling, and behavior patterns.
 
 > [!IMPORTANT]
 >

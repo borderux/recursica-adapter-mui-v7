@@ -1,13 +1,13 @@
 # FileUpload - Usage Guide
 
-This document describes how to integrate and use the `FileUpload` component in your projects using `@recursica/mui-adapter`.
+This document describes how to integrate and use the `FileUpload` component in your projects using `@recursica/adapter-mui-v7`.
 
 ---
 
 ## 1. Import Reference
 
 ```tsx
-import { FileUpload } from "@recursica/mui-adapter";
+import { FileUpload } from "@recursica/adapter-mui-v7";
 ```
 
 ---
@@ -18,7 +18,7 @@ import { FileUpload } from "@recursica/mui-adapter";
 
 ```tsx
 import React, { useState } from "react";
-import { FileUpload } from "@recursica/mui-adapter";
+import { FileUpload } from "@recursica/adapter-mui-v7";
 import { type RecursicaFileUploadItem } from "@recursica/adapter-common";
 
 export default function Demo() {
@@ -190,7 +190,7 @@ in `readOnly` mode, which has no remove icons to navigate to.)
 
 ## 9. Design System Integration
 
-All Recursica components in the `@recursica/mui-adapter` package adhere strictly to design system spacing, scaling, and behavior patterns.
+All Recursica components in the `@recursica/adapter-mui-v7` package adhere strictly to design system spacing, scaling, and behavior patterns.
 
 > [!IMPORTANT]
 >

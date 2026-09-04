@@ -1,13 +1,13 @@
 # Link - Usage Guide
 
-This document describes how to integrate and use the `Link` component in your projects using `@recursica/mui-adapter`.
+This document describes how to integrate and use the `Link` component in your projects using `@recursica/adapter-mui-v7`.
 
 ---
 
 ## 1. Import Reference
 
 ```tsx
-import { Link } from "@recursica/mui-adapter";
+import { Link } from "@recursica/adapter-mui-v7";
 ```
 
 ---
@@ -16,7 +16,7 @@ import { Link } from "@recursica/mui-adapter";
 
 ```tsx
 import React from "react";
-import { Link } from "@recursica/mui-adapter";
+import { Link } from "@recursica/adapter-mui-v7";
 
 export default function Demo() {
   return (
@@ -31,7 +31,7 @@ export default function Demo() {
 
 ## 3. Design System Integration
 
-All Recursica components in the `@recursica/mui-adapter` package adhere strictly to design system spacing, scaling, and behavior patterns.
+All Recursica components in the `@recursica/adapter-mui-v7` package adhere strictly to design system spacing, scaling, and behavior patterns.
 
 > [!IMPORTANT]
 >

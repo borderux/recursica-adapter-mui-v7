@@ -1,4 +1,4 @@
-# @recursica/mui-adapter
+# @recursica/adapter-mui-v7
 
 > Reusable UI components for Recursica applications based on Material UI (MUI) v7.
 

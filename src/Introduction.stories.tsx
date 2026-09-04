@@ -101,7 +101,7 @@ function IntroductionContent() {
           }}
         >
           <code>
-            npm install @recursica/mui-adapter @mui/material @emotion/react
+            npm install @recursica/adapter-mui-v7 @mui/material @emotion/react
             @emotion/styled
           </code>
         </Box>

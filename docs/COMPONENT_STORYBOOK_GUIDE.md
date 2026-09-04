@@ -9,7 +9,7 @@ If you are an AI agent writing stories:
 
 # Component Storybook Guide — MUI Adapter
 
-This document covers what's specific to writing stories in `mui-adapter`. The full shared guide (CSF3 rules, the global Layer decorator, static-vs-default story conventions, composable-component patterns, ReadOnly and FormControlWrapper `argTypes`) lives in the canonical [`packages/adapter-common/docs/COMPONENT_STORYBOOK_GUIDE.md`](../../adapter-common/docs/COMPONENT_STORYBOOK_GUIDE.md), built on top of the component implementation described in [`docs/COMPONENT_DEV_GUIDE.md`](./COMPONENT_DEV_GUIDE.md) — read that first.
+This document covers what's specific to writing stories in `adapter-mui-v7`. The full shared guide (CSF3 rules, the global Layer decorator, static-vs-default story conventions, composable-component patterns, ReadOnly and FormControlWrapper `argTypes`) lives in the canonical [`packages/adapter-common/docs/COMPONENT_STORYBOOK_GUIDE.md`](https://github.com/borderux/recursica/blob/main/packages/adapter-common/docs/COMPONENT_STORYBOOK_GUIDE.md), built on top of the component implementation described in [`docs/COMPONENT_DEV_GUIDE.md`](./COMPONENT_DEV_GUIDE.md) — read that first.
 
 ## Explicit Controls Filtering (MUI-specific)
 

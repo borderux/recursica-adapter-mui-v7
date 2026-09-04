@@ -92,6 +92,9 @@
   "ui-kit-breadcrumb--default": {
     "createdAt": "2026-08-31T02:37:35.912Z"
   },
+  "ui-kit-breadcrumb--last-item-as-link": {
+    "createdAt": "2026-09-04T14:43:55.698Z"
+  },
   "ui-kit-button--default": {
     "createdAt": "2026-08-31T02:37:37.809Z"
   },
@@ -166,6 +169,9 @@
   },
   "ui-kit-chip--error-state": {
     "createdAt": "2026-08-31T02:38:21.674Z"
+  },
+  "ui-kit-chip--max-width-ellipsis": {
+    "createdAt": "2026-09-04T14:44:54.268Z"
   },
   "ui-kit-chip--removable": {
     "createdAt": "2026-08-31T02:38:23.633Z"

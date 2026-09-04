@@ -14,7 +14,7 @@ First off, thank you for considering contributing to Recursica! It's people like
 
 ## 🤖 Instructions for AI Agents & Developers Building Components
 
-If you are tasked with building, modifying, or reviewing components **inside** the `mui-adapter`, you must strictly adhere to our architectural philosophy and design constraints.
+If you are tasked with building, modifying, or reviewing components **inside** the `adapter-mui-v7`, you must strictly adhere to our architectural philosophy and design constraints.
 
 **DO NOT** begin writing or modifying component code until you have read and understood the following core documents:
 
@@ -31,11 +31,11 @@ This adapter runs `@recursica/adapter-tester` in default mode — its `test/gold
 
 ## Keeping Shared Docs in Sync
 
-This adapter's `docs/COMPONENT_DEV_GUIDE.md` and `docs/COMPONENT_STORYBOOK_GUIDE.md` are **thin, MUI-specific deltas** — the full canonical rule set lives in [`packages/adapter-common/docs/`](../adapter-common/docs/). If you're changing a rule that applies to every adapter (not just this one), edit the canonical doc in `adapter-common/docs/`, not this adapter's delta — and check whether `mantine-adapter`'s delta doc needs a corresponding update. Only edit this adapter's own `docs/COMPONENT_DEV_GUIDE.md`/`docs/COMPONENT_STORYBOOK_GUIDE.md` for something genuinely specific to MUI.
+This adapter's `docs/COMPONENT_DEV_GUIDE.md` and `docs/COMPONENT_STORYBOOK_GUIDE.md` are **thin, MUI-specific deltas** — the full canonical rule set lives in [`packages/adapter-common/docs/`](https://github.com/borderux/recursica/tree/main/packages/adapter-common/docs/). If you're changing a rule that applies to every adapter (not just this one), edit the canonical doc in `adapter-common/docs/`, not this adapter's delta — and check whether `adapter-mantine-v8`'s delta doc needs a corresponding update. Only edit this adapter's own `docs/COMPONENT_DEV_GUIDE.md`/`docs/COMPONENT_STORYBOOK_GUIDE.md` for something genuinely specific to MUI.
 
 `docs/PHILOSOPHY.md` is different: it's a **full, self-contained, published** document (it's in this package's `"files"` array, unlike the two docs above), because it explains consumer-relevant behavior, not just contributor process. It does **not** link to a canonical doc anywhere. If you change something in it that reflects a philosophy shared by every adapter — not something genuinely specific to MUI — go check whether `mantine-adapter/docs/PHILOSOPHY.md` needs the equivalent change too. There's no automated or structural check for this; it's a manual discipline documented in `docs/DOCUMENTATION_STRATEGY.md` §4.
 
-See [`packages/adapter-common/docs/PIPELINE.md`](../adapter-common/docs/PIPELINE.md) for how doc and code changes flow across `adapter-common` → this adapter → `storybook-template` → `recursica-storybook`.
+See [`packages/adapter-common/docs/PIPELINE.md`](https://github.com/borderux/recursica/blob/main/packages/adapter-common/docs/PIPELINE.md) for how doc and code changes flow across `adapter-common` → this adapter → `storybook-template` → `recursica-storybook`.
 
 ## How Can I Contribute?
 

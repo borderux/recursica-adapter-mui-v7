@@ -42,7 +42,7 @@ the whole thumb circle, it doesn't add an icon inside it.
 Fixed the same way `Checkbox` in this adapter already solved the identical problem: build our
 own combined node — a `.thumb`-styled `<span>` wrapping `.thumbIconWrapper` with both
 `CheckIcon`/`CloseIcon` (inline SVGs, same paths as Mantine's, copied rather than imported
-since mui-adapter doesn't depend on `@mantine/core`) — and pass _that same node reference_ as
+since adapter-mui-v7 doesn't depend on `@mantine/core`) — and pass _that same node reference_ as
 both `icon` and `checkedIcon` (mirroring MUI's own `icon={icon} checkedIcon={icon}` pattern).
 Same reference means it never unmounts/remounts on toggle, which is what lets the two glyphs
 crossfade via CSS opacity instead of a hard swap — matching Mantine's `thumbIcon` behavior.

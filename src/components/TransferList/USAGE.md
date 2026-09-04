@@ -1,14 +1,14 @@
 # TransferList - Usage Guide
 
 This document describes how to integrate and use the `TransferList` component in your projects
-using `@recursica/mui-adapter`.
+using `@recursica/adapter-mui-v7`.
 
 ---
 
 ## 1. Import Reference
 
 ```tsx
-import { TransferList } from "@recursica/mui-adapter";
+import { TransferList } from "@recursica/adapter-mui-v7";
 ```
 
 ---
@@ -17,7 +17,7 @@ import { TransferList } from "@recursica/mui-adapter";
 
 ```tsx
 import React from "react";
-import { TransferList } from "@recursica/mui-adapter";
+import { TransferList } from "@recursica/adapter-mui-v7";
 
 export default function Demo() {
   return (
@@ -60,7 +60,7 @@ Pass `data` instead of `defaultData` to control the selection yourself.
 
 ## 3. Design System Integration
 
-All Recursica components in the `@recursica/mui-adapter` package adhere strictly to design system
+All Recursica components in the `@recursica/adapter-mui-v7` package adhere strictly to design system
 spacing, scaling, and behavior patterns.
 
 > [!IMPORTANT]

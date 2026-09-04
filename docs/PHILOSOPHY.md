@@ -2,7 +2,7 @@
 
 Recursica's component architecture isn't just a wrapper; it's a strict enforcing layer over MUI's massive API surface. Our primary goal is to ensure consistency, eliminate "design system rot," and provide clear boundaries for application developers using the UI Kit.
 
-This document serves as the governing framework for why the `mui-adapter` components are built the way they are.
+This document serves as the governing framework for why the `adapter-mui-v7` components are built the way they are.
 
 ## 1. Strict Separation of Props (The Unified Recursica Prop Layer)
 

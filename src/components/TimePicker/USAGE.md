@@ -1,13 +1,13 @@
 # TimePicker - Usage Guide
 
-This document describes how to integrate and use the `TimePicker` component in your projects using `@recursica/mui-adapter`.
+This document describes how to integrate and use the `TimePicker` component in your projects using `@recursica/adapter-mui-v7`.
 
 ---
 
 ## 1. Import Reference
 
 ```tsx
-import { TimePicker } from "@recursica/mui-adapter";
+import { TimePicker } from "@recursica/adapter-mui-v7";
 ```
 
 `TimePicker` requires `@mui/x-date-pickers` (optional peer dependency) to be installed alongside `@mui/material`. See [SETUP.md](../../../SETUP.md).
@@ -18,7 +18,7 @@ import { TimePicker } from "@recursica/mui-adapter";
 
 ```tsx
 import React from "react";
-import { TimePicker } from "@recursica/mui-adapter";
+import { TimePicker } from "@recursica/adapter-mui-v7";
 
 export default function Demo() {
   return <TimePicker label="Select Time" />;
@@ -45,7 +45,7 @@ The AM/PM control visually matches Recursica's `Dropdown` component exactly, rat
 
 ## 3. Design System Integration
 
-All Recursica components in the `@recursica/mui-adapter` package adhere strictly to design system spacing, scaling, and behavior patterns.
+All Recursica components in the `@recursica/adapter-mui-v7` package adhere strictly to design system spacing, scaling, and behavior patterns.
 
 > [!IMPORTANT]
 >

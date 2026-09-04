@@ -1,13 +1,13 @@
 # Accordion - Usage Guide
 
-This document describes how to integrate and use the `Accordion` component in your projects using `@recursica/mui-adapter`.
+This document describes how to integrate and use the `Accordion` component in your projects using `@recursica/adapter-mui-v7`.
 
 ---
 
 ## 1. Import Reference
 
 ```tsx
-import { Accordion } from "@recursica/mui-adapter";
+import { Accordion } from "@recursica/adapter-mui-v7";
 ```
 
 ---
@@ -16,7 +16,7 @@ import { Accordion } from "@recursica/mui-adapter";
 
 ```tsx
 import React from "react";
-import { Accordion } from "@recursica/mui-adapter";
+import { Accordion } from "@recursica/adapter-mui-v7";
 
 export default function Demo() {
   return (
@@ -34,7 +34,7 @@ export default function Demo() {
 
 ## 3. Design System Integration
 
-All Recursica components in the `@recursica/mui-adapter` package adhere strictly to design system spacing, scaling, and behavior patterns.
+All Recursica components in the `@recursica/adapter-mui-v7` package adhere strictly to design system spacing, scaling, and behavior patterns.
 
 > [!IMPORTANT]
 >

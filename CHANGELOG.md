@@ -1,4 +1,4 @@
-# @recursica/mui-adapter
+# @recursica/adapter-mui-v7
 
 ## 0.39.3
 
@@ -12,15 +12,15 @@
 
 ### Patch Changes
 
-- 46b123a: Breadcrumb now marks its last child `aria-current="page"` and, if it looks interactive (has `href`/`onClick`), strips both and drops it from the tab order — best-effort, not a guarantee for custom Link components with their own internal navigation. Backed by a CSS reset (no color/underline/pointer-events) and the current item now picks up Link's font-family. New shared `markCurrentPageItem` util in adapter-common. mui-adapter's story also gets parity with mantine-adapter's: the last crumb renders as plain text, not a `Link`.
-- 39de7b2: mui-adapter: Dropdown now renders its `placeholder` prop and gains a matching `.placeholder` style; Autocomplete's open menu now has the same input-to-menu gap as mantine; TimePicker's leading icon is no longer offset too far right.
+- 46b123a: Breadcrumb now marks its last child `aria-current="page"` and, if it looks interactive (has `href`/`onClick`), strips both and drops it from the tab order — best-effort, not a guarantee for custom Link components with their own internal navigation. Backed by a CSS reset (no color/underline/pointer-events) and the current item now picks up Link's font-family. New shared `markCurrentPageItem` util in adapter-common. adapter-mui-v7's story also gets parity with mantine-adapter's: the last crumb renders as plain text, not a `Link`.
+- 39de7b2: adapter-mui-v7: Dropdown now renders its `placeholder` prop and gains a matching `.placeholder` style; Autocomplete's open menu now has the same input-to-menu gap as mantine; TimePicker's leading icon is no longer offset too far right.
   mantine-adapter: DatePicker's read-only value is now formatted via `valueFormat` instead of a raw `Date.toString()`; TimePicker's leading icon no longer overlaps the field text.
 - 46b123a: Link now replaces the browser's native focus outline with the recursica focus ring (`--recursica_brand_states_focus_*`), matching Button/every other interactive component instead of falling back to the browser default. Fixes the same incorrect ring on Breadcrumb, since its items are typically Links.
 - 39de7b2: Fix Accordion chevron not rotating on expand, Modal centering instead of anchoring near top, and Toast showing a default icon it shouldn't. Add missing Accordion LayerOne story and exclude the intentional Grid span/size naming divergence from story parity. Fix NumberInput's default MUI focus ring/non-numeric input/icon spacing-color/height/border-radius, and TextArea's oversized autosize height.
-- 39de7b2: mui-adapter: Stepper's connector gap, description content, and button spacing now match mantine; Stepper vertical spacing now matches mantine; Timeline's connector now reaches the next bullet; Tree's chevron-to-label gap now uses the right token; Pagination is now fully wired up (circle size/colors/outline, chevron colors/hover, ripple removed, ellipsis centering, text labels).
+- 39de7b2: adapter-mui-v7: Stepper's connector gap, description content, and button spacing now match mantine; Stepper vertical spacing now matches mantine; Timeline's connector now reaches the next bullet; Tree's chevron-to-label gap now uses the right token; Pagination is now fully wired up (circle size/colors/outline, chevron colors/hover, ripple removed, ellipsis centering, text labels).
   mantine-adapter: Stepper's completed/current label and description colors now apply (were silently falling back to Mantine's own default gray/black).
-- 39de7b2: mui-adapter: Switch's read-only label and static-variations spacing now match mantine; Label's right-alignment and optional-text parentheses now work; Button's loading state shows only a centered loader (no label); Text's static-variations spacing matches mantine; Tabs' `inverted` variant now actually renders the tab list below the content.
-  mantine-adapter: Button's loader color now matches its label text color; Tabs' `inverted` variant now actually renders the tab list below the content; Grid gains a `ResponsiveSizes` story mirroring mui-adapter's.
+- 39de7b2: adapter-mui-v7: Switch's read-only label and static-variations spacing now match mantine; Label's right-alignment and optional-text parentheses now work; Button's loading state shows only a centered loader (no label); Text's static-variations spacing matches mantine; Tabs' `inverted` variant now actually renders the tab list below the content.
+  mantine-adapter: Button's loader color now matches its label text color; Tabs' `inverted` variant now actually renders the tab list below the content; Grid gains a `ResponsiveSizes` story mirroring adapter-mui-v7's.
 - Updated dependencies [46b123a]
   - @recursica/adapter-common@0.28.2
 
@@ -28,7 +28,7 @@
 
 ### Patch Changes
 
-- a104e8a: Removed `searchable` from `Dropdown`'s shared contract — not a supported feature (that's `AutoComplete`'s job). mantine-adapter now strips it at runtime like its other unsupported native props; mui-adapter never wired it up.
+- a104e8a: Removed `searchable` from `Dropdown`'s shared contract — not a supported feature (that's `AutoComplete`'s job). mantine-adapter now strips it at runtime like its other unsupported native props; adapter-mui-v7 never wired it up.
 - a104e8a: Fixed `Panel`'s `wrapHeaderText` default (was `false`, contract documents `true`) in both adapters.
 - Updated dependencies [a104e8a]
 - Updated dependencies [a104e8a]
@@ -96,7 +96,7 @@
 
 ### Patch Changes
 
-- d48149c: Chip's selected checkmark now overlays the leading icon instead of sitting to its left, matching MUI's native behavior (mui-adapter already did this; mantine-adapter now matches).
+- d48149c: Chip's selected checkmark now overlays the leading icon instead of sitting to its left, matching MUI's native behavior (adapter-mui-v7 already did this; mantine-adapter now matches).
 
 ## 0.34.3
 
@@ -106,7 +106,7 @@
 - 662c591: Layout components (Flex, Stack, Group, Grid) no longer share a formal Recursica prop contract from `adapter-common` — removed `RecursicaFlexProps`/`RecursicaStackProps`/`RecursicaGroupProps`/`RecursicaGridProps`/`RecursicaGridColProps`. Each adapter's layout components now simply pass through the underlying kit's own props, plus `rec-*` spacing token support.
 
   - mantine-adapter: Flex/Stack/Group unchanged at the API level (Mantine's own props already matched). **Grid's `gap` prop reverts to Mantine's native `gutter`**; `Grid.Col`'s responsive breakpoint objects use Mantine's own `xs` (not the invented `base`) as the smallest key.
-  - mui-adapter: Flex/Group keep their Mantine-shaped props (MUI has no native equivalent). **Stack now passes through MUI's own `spacing`/`alignItems`/`justifyContent` directly** (fixes a bug where passing native `alignItems`/`justifyContent` was silently clobbered). **Grid is rebuilt on MUI's own vocabulary** (`spacing`, `size`, `offset`, `order`, `xs`/`sm`/`md`/`lg`/`xl`) instead of mirroring Mantine's `gap`/`span`/`base`; container-level `grow` is dropped in favor of MUI's native per-column `size="grow"`.
+  - adapter-mui-v7: Flex/Group keep their Mantine-shaped props (MUI has no native equivalent). **Stack now passes through MUI's own `spacing`/`alignItems`/`justifyContent` directly** (fixes a bug where passing native `alignItems`/`justifyContent` was silently clobbered). **Grid is rebuilt on MUI's own vocabulary** (`spacing`, `size`, `offset`, `order`, `xs`/`sm`/`md`/`lg`/`xl`) instead of mirroring Mantine's `gap`/`span`/`base`; container-level `grow` is dropped in favor of MUI's native per-column `size="grow"`.
 
 - 4fdd1af: Wired vitest into `npm test` (unit tests for utils). Added a Button/kit CSS-isolation DOM test, run separately via `npm run test:dom` (not part of `npm test`/CI). Added empty test scaffolds per component.
 - Updated dependencies [662c591]
@@ -144,7 +144,7 @@
 
 ### Patch Changes
 
-- bc70636: Fix Dropdown/Autocomplete selected-option background highlight. mantine-adapter was keying off `data-combobox-selected` (Mantine's transient keyboard-nav highlight) instead of `data-combobox-active` (the real "matches current value" attribute), so the highlight only showed while arrow-key navigating. mui-adapter's Autocomplete had no selected-state rule at all; now keys off MUI's own `aria-selected`.
+- bc70636: Fix Dropdown/Autocomplete selected-option background highlight. mantine-adapter was keying off `data-combobox-selected` (Mantine's transient keyboard-nav highlight) instead of `data-combobox-active` (the real "matches current value" attribute), so the highlight only showed while arrow-key navigating. adapter-mui-v7's Autocomplete had no selected-state rule at all; now keys off MUI's own `aria-selected`.
 - Updated dependencies [bc70636]
   - @recursica/adapter-common@0.24.0
 
@@ -238,12 +238,12 @@
 ### Minor Changes
 
 - e0f5643: Implement `TransferList` (dual listbox) in both adapters, replacing the "coming soon" stub. Composes `FormControlWrapper`, `TextField`, `Checkbox`/`CheckboxGroup`, `Badge`, and `Button` — supports controlled/uncontrolled `data`, per-item grouping, per-pane search, and `stacked`/`side-by-side` form layout.
-- 2fb7069: Add `Popover` component (click-controlled dropdown with beak/arrow, composable `Popover.Target`/`Popover.Dropdown`), bringing mui-adapter in parity with mantine-adapter's Popover.
+- 2fb7069: Add `Popover` component (click-controlled dropdown with beak/arrow, composable `Popover.Target`/`Popover.Dropdown`), bringing adapter-mui-v7 in parity with mantine-adapter's Popover.
 - 2fb7069: Fix `Popover`: gap now matches Mantine (Mui's built-in per-placement tooltip margin was stacking on top of our offset), and the beak now has a visible border matching the dropdown body. Fix `Button`: line-height now applies via `labelText` per size (matching Mantine) instead of being dropped from the small-size token.
 - 2fb7069: Fix `SegmentedControl` height (MUI's default `ToggleButton` box model was stacking on top of the token-driven label height) and selected-state styling (`Mui-selected` wasn't wrapped in `:global()`, so CSS Modules silently dropped the selector).
   Also default to the first item selected when uncontrolled, matching mantine.
 - 2fb7069: Fix `SegmentedControl` labels rendering all-caps in MUI (its `ToggleButton` uppercase default was leaking through an invalid text-transform token). Labels now match Mantine's original casing.
-- 2fb7069: Fix `Slider`'s `Disabled` story (was passing `disabled: false` in both adapters). In `mui-adapter`, also fix the disabled track showing red instead of grey, make the thumb focus ring keyboard-only (no glow on click/drag) to match Mantine, render assistive text as a `<span>`, and align mark label color/position with Mantine (which now applies its own mark label color token too).
+- 2fb7069: Fix `Slider`'s `Disabled` story (was passing `disabled: false` in both adapters). In `adapter-mui-v7`, also fix the disabled track showing red instead of grey, make the thumb focus ring keyboard-only (no glow on click/drag) to match Mantine, render assistive text as a `<span>`, and align mark label color/position with Mantine (which now applies its own mark label color token too).
 - 2fb7069: Fix `Stepper`: use MUI's `alternativeLabel` so horizontal labels center under the icon and the connector centers on it, render the completed check mark as our own token-colored glyph instead of MUI's default blue `CheckCircle` SVG, and draw the vertical connecting line as a stretch-aware rail so it reaches the next step's circle regardless of description height.
 - 2fb7069: Fix `Tabs` showing a MUI click ripple that Mantine's tabs don't have. `Tab` now passes `disableRipple`.
 - 2fb7069: Fix `Tabs`: `outline` variant's selected tab now shows a connected border box (matching Mantine) with no stray bottom border line. `default` variant no longer shifts sibling tabs when selecting one (a stray ripple element was being pulled into flex layout). `vertical` orientation no longer stretches the tablist to the full row width, and its divider now runs the full height with the selection indicator aligned on it instead of offset to the side.
@@ -263,7 +263,7 @@
 
 ### Minor Changes
 
-- 3d75770: Implement the `FileInput` component (single-line, `TextField`-shaped file picker with a native drag-and-drop drop target, single- and multiple-file modes, and a trailing clear icon) in `mantine-adapter` and `mui-adapter`, replacing the "coming soon" stub, with a shared `RecursicaFileInputProps` contract in `adapter-common` reusing `FileUpload`'s `RecursicaFileUploadItem`/validation interface (`accept`/`maxSize`/`maxFiles`/`readOnly`). Also adds `FileInput` to `RECURSICA_COMPONENTS` and moves `mui-adapter`'s export of it into the standard `wrapComponent` set (it was previously exported unwrapped, alongside the polymorphic layout primitives, as a leftover from its stub form).
+- 3d75770: Implement the `FileInput` component (single-line, `TextField`-shaped file picker with a native drag-and-drop drop target, single- and multiple-file modes, and a trailing clear icon) in `mantine-adapter` and `adapter-mui-v7`, replacing the "coming soon" stub, with a shared `RecursicaFileInputProps` contract in `adapter-common` reusing `FileUpload`'s `RecursicaFileUploadItem`/validation interface (`accept`/`maxSize`/`maxFiles`/`readOnly`). Also adds `FileInput` to `RECURSICA_COMPONENTS` and moves `adapter-mui-v7`'s export of it into the standard `wrapComponent` set (it was previously exported unwrapped, alongside the polymorphic layout primitives, as a leftover from its stub form).
 
 ### Patch Changes
 
@@ -276,7 +276,7 @@
 
 ### Minor Changes
 
-- 1c317a3: Implement the `FileUpload` component (drag-and-drop dropzone, browse-button fallback, removable file-chip list) in `mantine-adapter` and `mui-adapter`, replacing the "coming soon" stub, with a shared `RecursicaFileUploadProps`/`RecursicaFileUploadItem` contract in `adapter-common`. Also fixes `mui-adapter`'s `Chip` component's public type to allow `children` (a pre-existing type-only gap; the component already accepted them at runtime).
+- 1c317a3: Implement the `FileUpload` component (drag-and-drop dropzone, browse-button fallback, removable file-chip list) in `mantine-adapter` and `adapter-mui-v7`, replacing the "coming soon" stub, with a shared `RecursicaFileUploadProps`/`RecursicaFileUploadItem` contract in `adapter-common`. Also fixes `adapter-mui-v7`'s `Chip` component's public type to allow `children` (a pre-existing type-only gap; the component already accepted them at runtime).
 
 ### Patch Changes
 
@@ -311,7 +311,7 @@
 ### Patch Changes
 
 - 106bc34: Autocomplete (MUI): fixed four bugs, all traced to `renderInput` discarding MUI's `InputProps` (dropping the `classes.inputRoot` className, the anchor ref, and adornment slots). Restored `InputProps` so the design-system border/padding actually applies instead of MUI's default underline chrome; wired `leftSection`/`rightSection` into `startAdornment`/`endAdornment` (previously destructured but never rendered, so icons never showed); and stopped coercing `error` to a boolean before the wrapper, which was discarding the error message string (ErrorState story showed no assistive text).
-- 106bc34: Avatar (MUI): fixed `variant` being fed into MUI's native shape prop instead of a color treatment, making it a silent no-op. Also documented `children` in the shared prop types and added missing mui-adapter implementation notes.
+- 106bc34: Avatar (MUI): fixed `variant` being fed into MUI's native shape prop instead of a color treatment, making it a silent no-op. Also documented `children` in the shared prop types and added missing adapter-mui-v7 implementation notes.
 - 106bc34: Checkbox (MUI): fixed the checkmark never appearing on click — `checked` was always
   forced onto MUI's native input even for plain uncontrolled usage (no `checked`/only
   `defaultChecked`), pinning it to a value that never updates after the initial render.
@@ -331,10 +331,10 @@
 - 106bc34: Label (MUI): fixed focused descendant controls (e.g. a grouped Switch/Checkbox) bleeding MUI's default blue into the label text, mirroring the existing `.Mui-error` override with a matching `.Mui-focused` one.
 - 106bc34: Label (MUI): fixed optional text rendering inline next to the label instead of on its own line — `innerLayout` now wraps and `optionalText` is forced onto a full-width row, matching `mantine-adapter`.
 - 106bc34: Audited every component for the "spread after computed props" ordering bug (caller props silently overriding internal className/classes/icon/sx/onChange) and reordered spread-first in ~25 components. See COMPONENT_DEV_GUIDE.md §3.2 (adapter-common) for the rule.
-- 106bc34: Removed leftover literal Mantine references from mui-adapter CSS/types (dead `:global(.mantine-*)` selectors, unused classes wiring, a stray `@mantine/core` type augmentation) and swapped a hardcoded Mantine red for the real error-text token in Radio/Checkbox/Switch.
-- 106bc34: Radio/Checkbox/Switch description and error text now render through the shared `AssistiveElement` component instead of locally styled divs, removing the last hardcoded hex values (Mantine's default dimmed gray) from mui-adapter CSS.
+- 106bc34: Removed leftover literal Mantine references from adapter-mui-v7 CSS/types (dead `:global(.mantine-*)` selectors, unused classes wiring, a stray `@mantine/core` type augmentation) and swapped a hardcoded Mantine red for the real error-text token in Radio/Checkbox/Switch.
+- 106bc34: Radio/Checkbox/Switch description and error text now render through the shared `AssistiveElement` component instead of locally styled divs, removing the last hardcoded hex values (Mantine's default dimmed gray) from adapter-mui-v7 CSS.
 - 106bc34: Fixed Radio rendering no visible circle (only the label) — `classes` was being read as `classNames` with Mantine-shaped slot names MUI doesn't support, so the circle's styling was silently dropped. Also fixed the label rendering vertically offset from the circle, disabled MUI's default click ripple, made description/error mutually exclusive (error wins), and reordered the props spread so it can no longer silently override the render-critical props placed after it.
-- 106bc34: Fixed RadioGroup selection not updating in mui-adapter — its onChange was typed and wired as MUI's native `(event, value)`, but Mantine's RadioGroup (the cross-adapter source of truth) only ever calls back with `(value)`. Normalized the shared contract and mui-adapter's wiring to single-argument.
+- 106bc34: Fixed RadioGroup selection not updating in adapter-mui-v7 — its onChange was typed and wired as MUI's native `(event, value)`, but Mantine's RadioGroup (the cross-adapter source of truth) only ever calls back with `(value)`. Normalized the shared contract and adapter-mui-v7's wiring to single-argument.
 - 106bc34: Switch: attached `SwitchGroup` as the `Switch.Group` compound export (it existed standalone but was never attached), and tightened `RecursicaSwitchGroupProps` value types from `unknown[]` to `string[]`.
 - 106bc34: Switch (MUI): `SwitchGroup` now actually controls its children via a `SwitchGroupContext` (same pattern as `Checkbox`/`CheckboxGroup`) — previously `value`/`defaultValue`/`onChange` were destructured and discarded, so grouped switches never checked or updated.
 - 106bc34: SwitchGroup: fixed `side-by-side` layout always rendering as if stacked — the group was capped to the switch-item label's own 200px max-width, narrower than the mandatory 224px label column, guaranteeing a wrap.
@@ -386,7 +386,7 @@
 ### Minor Changes
 
 - 6e99afc: Versioned all for refresh
-- dc583f5: Add the `Tree` component (mantine-adapter wraps `@mantine/core`'s `Tree`; mui-adapter wraps the new `@mui/x-tree-view` peer dependency). Adds shared `RecursicaTreeProps`/`RecursicaTreeNode` to adapter-common.
+- dc583f5: Add the `Tree` component (mantine-adapter wraps `@mantine/core`'s `Tree`; adapter-mui-v7 wraps the new `@mui/x-tree-view` peer dependency). Adds shared `RecursicaTreeProps`/`RecursicaTreeNode` to adapter-common.
 
 ### Patch Changes
 
@@ -410,7 +410,7 @@
 
 ### Minor Changes
 
-- c49adb9: Added a Grid component (Grid, Grid.Col) to both the mantine-adapter and mui-adapter, sharing RecursicaGridProps/RecursicaGridColProps from adapter-common so both adapters expose the exact same prop API. mantine-adapter wraps Mantine's native Grid/Grid.Col directly; mui-adapter hand-composes the same API from MUI's single merged Grid component, since MUI has no separate container/item split.
+- c49adb9: Added a Grid component (Grid, Grid.Col) to both the mantine-adapter and adapter-mui-v7, sharing RecursicaGridProps/RecursicaGridColProps from adapter-common so both adapters expose the exact same prop API. mantine-adapter wraps Mantine's native Grid/Grid.Col directly; adapter-mui-v7 hand-composes the same API from MUI's single merged Grid component, since MUI has no separate container/item split.
 
 ### Patch Changes
 
@@ -545,7 +545,7 @@
 
 ### Minor Changes
 
-- 0ead0d7: Updated with mui-adapter changes
+- 0ead0d7: Updated with adapter-mui-v7 changes
 
 ## 0.4.0
 
@@ -557,7 +557,7 @@
 
 ### Minor Changes
 
-- 3756d7b: Cleaned up stories and added layout stories to mui-adapter
+- 3756d7b: Cleaned up stories and added layout stories to adapter-mui-v7
 
 ## 0.2.0
 

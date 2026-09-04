@@ -1,4 +1,4 @@
-OPEN QUESTIONS — mui-adapter source-of-truth audit (2026-08-30)
+OPEN QUESTIONS — adapter-mui-v7 source-of-truth audit (2026-08-30)
 ================================================================
 
 Context: full adapter-tester:source-of-truth run against mantine-adapter found 65 failing
@@ -10,7 +10,7 @@ IMPORTANT CAVEAT ON EVERYTHING BELOW
 -------------------------------------
 The source-of-truth divergence check compares two *committed* golden PNGs on disk
 (test/golden/*.png), never a live render. None of the fixes below will show as passing in
-adapter-tester:source-of-truth until mui-adapter's own goldens are regenerated with
+adapter-tester:source-of-truth until adapter-mui-v7's own goldens are regenerated with
 --update-golden (gated to explicit developer permission per AGENT.md — asked Matt, awaiting
 answer as of this writing). All "diffPixels" numbers below were measured by hand — computing
 pixelmatch() directly between mui's current live render and mantine's committed golden,
@@ -122,7 +122,7 @@ Matt sent a second, manually-written report of 30+ specific discrepancies across
 (NumberInput, Stepper, Dropdown, Accordion, Grid, Avatar, Text, Pagination, Switch, TextArea,
 DatePicker, Label, Button, Modal, Timeline, Toast, Tree, Panel, Tabs, Autocomplete, TimePicker).
 Worked in 5 parallel clusters. All fixes documented in each component's own
-IMPLEMENTATION_NOTES.md (mui-adapter and, where a genuine source-of-truth bug was found,
+IMPLEMENTATION_NOTES.md (adapter-mui-v7 and, where a genuine source-of-truth bug was found,
 mantine-adapter). Note: this likely supersedes some ROUND 1 entries above (Stepper's height
 issue and Toast's residual border-position gap both look plausibly resolved by this round's
 Group.tsx/Pagination/Toast padding fixes) — re-check after a golden regen rather than assuming
@@ -144,7 +144,7 @@ but these were real defects, not intentional design):
 
 Story-set changes (both kits kept in sync):
 - Deleted `ui-kit-accordion--layer-one` and `ui-kit-avatar--layer-one-outline` from both
-  mui-adapter and mantine-adapter (mantine had identical stories) — Matt confirmed not needed.
+  adapter-mui-v7 and mantine-adapter (mantine had identical stories) — Matt confirmed not needed.
 - Added `ui-kit-grid--responsive-sizes` to mantine-adapter (existed only in mui) using Mantine's
   own `span` prop (no `size` prop exists in Mantine's Grid API).
 - ui-kit-stepper--default's "Step 2 content" complaint: not a component bug — mui's own story
@@ -204,7 +204,7 @@ ROUND 3 (2026-08-31) — answers to Round 2's open questions, after golden refre
 
 5. Tabs non-inverted default 32px vs 24px gap — no answer this round, still open, untouched.
 
-6. Tabs vertical+inverted floating indicator — RESOLVED in mui-adapter. Root cause: the
+6. Tabs vertical+inverted floating indicator — RESOLVED in adapter-mui-v7. Root cause: the
    horizontal `inverted` fix (Round 1) was scoped to `[data-orientation="horizontal"]` only, so
    toggling `inverted` on vertical did nothing — the list stayed put but the divider/indicator's
    right-side offsets assumed a margin that no longer matched, hence the "floating" look. Fixed

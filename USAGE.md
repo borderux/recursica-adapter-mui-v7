@@ -1,6 +1,6 @@
 # MUI Adapter Usage Guide
 
-This guide outlines how human developers and AI agents should consume the `mui-adapter` library when building applications.
+This guide outlines how human developers and AI agents should consume the `adapter-mui-v7` library when building applications.
 
 ## 1. Setup and Integration
 
@@ -11,10 +11,10 @@ Before consuming the components, the application must be properly integrated wit
 
 ## 2. Importing Components
 
-All UI components should be imported directly from the `mui-adapter`.
+All UI components should be imported directly from the `adapter-mui-v7`.
 
 ```tsx
-import { Button, Stack, Container } from "@recursica/mui-adapter";
+import { Button, Stack, Container } from "@recursica/adapter-mui-v7";
 ```
 
 **Rule:** Do NOT import components directly from `@mui/material` unless a specific exception has been documented (e.g. `Alert`, which has no planned Recursica equivalent). If you need a standard component, always check the adapter first.
@@ -37,7 +37,7 @@ If you encounter an absolute necessity to break out of the design system (e.g., 
 </Button>
 ```
 
-**Warning:** Using `overStyled` should be treated as technical debt. If you find yourself repeatedly needing it for a specific variant, you should instead switch context and **contribute** that variant natively into the `mui-adapter`.
+**Warning:** Using `overStyled` should be treated as technical debt. If you find yourself repeatedly needing it for a specific variant, you should instead switch context and **contribute** that variant natively into the `adapter-mui-v7`.
 
 See [OVERSTYLING.md](OVERSTYLING.md) for the full philosophy behind this escape hatch, which layout properties are permitted by default, and how to visually audit over-styled components in development builds.
 
@@ -46,7 +46,7 @@ See [OVERSTYLING.md](OVERSTYLING.md) for the full philosophy behind this escape 
 If the adapter does not yet implement a required component:
 
 1. You may try utilizing standard `recursica_variables_scoped.css` properties on the native MUI component.
-2. However, **this is not recommended**. The preferred approach is to pause integration, navigate into the `mui-adapter` package, and natively build the missing wrapper component following the `CONTRIBUTING.md` guidelines.
+2. However, **this is not recommended**. The preferred approach is to pause integration, navigate into the `adapter-mui-v7` package, and natively build the missing wrapper component following the `CONTRIBUTING.md` guidelines.
 
 ## 6. Managing CSS Changes with PostCSS Plugin
 

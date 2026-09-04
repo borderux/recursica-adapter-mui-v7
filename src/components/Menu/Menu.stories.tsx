@@ -141,7 +141,7 @@ const ChevronRightIcon = (props: React.ComponentProps<"svg">) => (
   </svg>
 );
 
-// mui-adapter's Menu is monolithic (see IMPLEMENTATION_NOTES.md) — there is no
+// adapter-mui-v7's Menu is monolithic (see IMPLEMENTATION_NOTES.md) — there is no
 // Menu.Sub composable, so a submenu is just a MenuItem that anchors its own
 // nested Menu, mirroring how the top-level trigger manages its own anchorEl.
 interface SubMenuTriggerProps {
@@ -337,7 +337,7 @@ export const WithMaxHeight: Story = {
   },
 };
 
-// mui-adapter's Menu has no native hover-trigger support (unlike Mantine's `trigger` prop),
+// adapter-mui-v7's Menu has no native hover-trigger support (unlike Mantine's `trigger` prop),
 // so this story implements open-on-hover itself: hovering the target opens the menu, and a
 // short close delay (mirroring Mantine's `closeDelay`) keeps it open while the pointer moves
 // from the target into the dropdown, since MUI's Menu renders in a portal outside the

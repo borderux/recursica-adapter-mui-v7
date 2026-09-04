@@ -24,7 +24,7 @@ menu rendered flush against the input's bottom border — mantine-adapter's equi
 built on Mantine's own `Popover`) has an 8px gap there. That gap isn't a Recursica token: it's
 Mantine's own `Popover` untokenized default (`offset: 8` in `@mantine/core`'s `Popover.mjs`), not
 anything mantine-adapter itself wires up — there's no dedicated "menu offset" entry in the token
-schema. Rather than hardcode an unexplained `8px` in mui-adapter, reused
+schema. Rather than hardcode an unexplained `8px` in adapter-mui-v7, reused
 `--recursica_brand_dimensions_general_default` (also 8px) — the closest real token with a matching
 value — via `slotProps.popper.className` + a new `.popper { margin-top: ...; }` rule (`!important`
 needed: MUI's inline `margin: 0px` otherwise always wins). If the token schema ever adds a real gap
