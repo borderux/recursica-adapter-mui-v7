@@ -1,0 +1,151 @@
+{
+  "name": "@recursica/adapter-mui-v7",
+  "description": "Reusable UI components for Recursica applications based on Material UI (MUI) v7",
+  "private": false,
+  "homepage": "https://github.com/borderux/recursica-adapter-mui-v7",
+  "author": "hi@borderux.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/borderux/recursica-adapter-mui-v7/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/borderux/recursica-adapter-mui-v7.git"
+  },
+  "version": "1.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "main": "./dist/adapter-mui-v7.cjs",
+  "module": "./dist/adapter-mui-v7.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/adapter-mui-v7.js",
+      "require": "./dist/adapter-mui-v7.cjs"
+    },
+    "./style.css": "./dist/adapter-mui-v7.css"
+  },
+  "files": [
+    "dist",
+    "src",
+    "CHANGELOG.md",
+    ".storybook/commonArgTypes.ts",
+    "llms.txt",
+    "USAGE.md",
+    "ARCHITECTURE.md",
+    "SETUP.md",
+    "OVERSTYLING.md",
+    "docs/PHILOSOPHY.md",
+    "recursica_variables_scoped.css",
+    "recursica_brand.json",
+    "recursica_tokens.json",
+    "recursica_ui-kit.json"
+  ],
+  "keywords": [
+    "react",
+    "ui",
+    "components",
+    "typescript",
+    "mui",
+    "material-ui",
+    "recursica",
+    "design system",
+    "design systems"
+  ],
+  "scripts": {
+    "dev": "npm run storybook",
+    "build": "vite build --mode library",
+    "build-storybook": "storybook build -o storybook-static",
+    "lint": "eslint .",
+    "check-types": "tsc --noEmit",
+    "storybook": "storybook dev",
+    "analyze-tokens": "analyze-tokens --css ./recursica_variables_scoped.css --dir src/components --output token-analysis.json",
+    "prebuild": "npm run analyze-tokens",
+    "adapter-tester": "adapter-tester --serve",
+    "adapter-tester:automated": "adapter-tester",
+    "adapter-tester:update-golden": "adapter-tester --update-golden",
+    "adapter-tester:source-of-truth": "adapter-tester --divergence-only",
+    "test": "vitest run --project unit",
+    "test:dom": "vitest run --project dom",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css,scss}\"",
+    "validate-adapter-status": "node scripts/validate-adapter-status.mjs",
+    "prepare": "node .husky/install.mjs",
+    "precommit": "npm run check-types && npm run lint && npm run format && npm run validate-adapter-status",
+    "version": "changeset version",
+    "release": "changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.7",
+    "@eslint/js": "^9.25.0",
+    "@mui/lab": "^7.0.1-beta.25",
+    "@mui/x-date-pickers": "^9.11.0",
+    "@mui/x-tree-view": "^9.11.0",
+    "@playwright/test": "^1.62.1",
+    "@recursica/adapter-tester": "^5.1.1",
+    "@recursica/recursica-postcss-vars": "^1.5.0",
+    "@recursica/storybook-template": "^0.7.11",
+    "@recursica/token-analyzer": "^1.7.3",
+    "@types/node": "^24.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.2",
+    "prettier": "3.5.3",
+    "@storybook/addon-a11y": "^10.3.3",
+    "@storybook/addon-docs": "^10.3.3",
+    "@storybook/addon-mcp": "^0.4.2",
+    "@storybook/addon-vitest": "^10.3.3",
+    "@storybook/react-vite": "^10.3.3",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react": "^4.4.1",
+    "@vitest/browser": "^3.2.4",
+    "@vitest/coverage-v8": "^3.2.4",
+    "eslint": "^9.25.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "eslint-plugin-storybook": "^10.3.3",
+    "globals": "^16.0.0",
+    "playwright": "^1.53.0",
+    "react-markdown": "^10.1.0",
+    "sass": "^1.89.2",
+    "sirv": "^3.0.2",
+    "storybook": "^10.3.3",
+    "storybook-dark-mode": "^5.0.0",
+    "strip-literal": "^3.0.0",
+    "ts-morph": "^28.0.0",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.30.1",
+    "vite": "^6.3.5",
+    "vite-plugin-dts": "^4.5.4",
+    "vite-plugin-svgr": "^4.3.0",
+    "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "@recursica/adapter-common": "^0.29.0",
+    "@recursica/official-release": "^2.8.0",
+    "dayjs": "^1.11.21"
+  },
+  "peerDependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/lab": "^7.0.1-beta.25",
+    "@mui/material": "^7.3.0",
+    "@mui/x-date-pickers": "^9.11.0",
+    "@mui/x-tree-view": "^9.11.0",
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "peerDependenciesMeta": {
+    "@mui/lab": {
+      "optional": true
+    },
+    "@mui/x-date-pickers": {
+      "optional": true
+    },
+    "@mui/x-tree-view": {
+      "optional": true
+    }
+  }
+}
