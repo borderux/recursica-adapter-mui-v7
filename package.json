@@ -84,7 +84,7 @@
     "@mui/x-date-pickers": "^9.11.0",
     "@mui/x-tree-view": "^9.11.0",
     "@playwright/test": "^1.62.1",
-    "@recursica/adapter-tester": "^5.1.1",
+    "@recursica/adapter-tester": "^5.1.2",
     "@recursica/recursica-postcss-vars": "^1.5.0",
     "@recursica/storybook-template": "^0.7.11",
     "@recursica/token-analyzer": "^1.7.3",
