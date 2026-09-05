@@ -1,5 +1,11 @@
 # @recursica/adapter-mui-v7
 
+## 1.0.1
+
+### Patch Changes
+
+- 74c9c92: Updated theme files from the latest Forge Recursica export: brand primary/secondary fonts swapped to Dongle/Nunito Sans, and the tertiary font role was dropped. No component code changes required.
+
 ## 0.39.3
 
 ### Patch Changes
