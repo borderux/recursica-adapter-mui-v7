@@ -27,7 +27,7 @@ If you are tasked with building, modifying, or reviewing components **inside** t
 
 ## Visual Regression Testing
 
-This adapter runs `@recursica/adapter-tester` in default mode — its `test/golden/` images are checked for own-drift and flagged (never failed) for divergence from `@recursica/mantine-adapter`'s golden baseline. See [`packages/adapter-tester/README.md`](../adapter-tester/README.md) and [`packages/adapter-tester/AGENT.md`](../adapter-tester/AGENT.md) for the full workflow, thresholds, and exemption rules; don't duplicate them here.
+This adapter runs `@recursica/adapter-tester` in default mode — its `test/golden/` images are checked for own-drift and flagged (never failed) for divergence from `@recursica/mantine-adapter`'s golden baseline. See [`packages/adapter-tester/README.md`](https://github.com/borderux/recursica/blob/main/packages/adapter-tester/README.md) and [`packages/adapter-tester/AGENT.md`](https://github.com/borderux/recursica/blob/main/packages/adapter-tester/AGENT.md) for the full workflow, thresholds, and exemption rules; don't duplicate them here.
 
 ## Keeping Shared Docs in Sync
 
