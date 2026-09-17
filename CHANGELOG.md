@@ -1,5 +1,12 @@
 # @recursica/adapter-mui-v7
 
+## 1.0.3
+
+### Patch Changes
+
+- 9c1a1cc: Fixed broken relative links in CONTRIBUTING.md's `adapter-tester` README/AGENT references that pointed back into the monorepo and no longer resolved after this repo's split into a standalone repo. They now use absolute GitHub URLs.
+- 9c1a1cc: Fixed the pre-commit lint-staged config running `prettier --write .` and `eslint --fix .` against the whole repo instead of just staged files, so a commit could silently reformat/relint files you never touched. Also removed the unused `precommit` npm script — the Husky hook runs lint-staged directly and never called it.
+
 ## 1.0.2
 
 ### Patch Changes
