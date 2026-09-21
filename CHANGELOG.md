@@ -1,5 +1,13 @@
 # @recursica/adapter-mui-v7
 
+## 1.0.4
+
+### Patch Changes
+
+- 52b536e: Bumped `@recursica/adapter-tester` to 5.1.3, which fails loudly instead of silently passing every story when the Mantine source-of-truth golden baseline can't be resolved. Needed now that a companion adapter-tester fix corrects which GitHub tag it fetches golden images from for `@recursica/adapter-mantine-v8` releases — on 5.1.2 that mismatch was masked as a silent pass instead of a build failure.
+- 52b536e: Bumped `@recursica/token-analyzer` to 1.8.0, which recognizes the `_modes_` naming used by newer Forge token exports (previously only `_themes_`) so legitimate mode/layer backing variables stop being flagged as unused.
+- 52b536e: Removed `.storybook/preview-head.html`'s hardcoded Google Fonts `@import`s, which had drifted out of sync with `recursica_tokens.json`'s actual typefaces (still referencing Inter/Roboto, missing Quattrocento/Dongle/Nunito Sans). Fonts are already loaded dynamically from the JSON via `preview.tsx`'s `withRecursicaFonts` decorator, so the static file was redundant and wrong.
+
 ## 1.0.3
 
 ### Patch Changes
