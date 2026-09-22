@@ -7,7 +7,18 @@
  *   structural layout mechanics, not a design token.
  */
 
-.root {
+/* Brand-layer exemption (recursica-allow-brand) — layout-grid tokens have no ui-kit-layer
+ * representation in Forge's model (a grid is a page-layout primitive, not a "component"), so
+ * Grid is the one component that reads brand_layout-grids_* directly. Column-gutter/row-gutter
+ * are applied via MUI's own native `columnSpacing`/`rowSpacing` props in Grid.tsx instead (MUI's
+ * Grid generator reads them straight off the prop, no CSS declaration needed); `margin` has no
+ * MUI Grid prop equivalent at all, so it's applied here, always from the design token — margin is
+ * design-system-managed, not an integrator-facing override. See IMPLEMENTATION_NOTES.md.
+ *   recursica-allow-brand: --recursica_brand_layout-grids_default_margin
+ */
+
+.root.root {
+  margin: var(--recursica_brand_layout-grids_default_margin);
 }
 
 .col {

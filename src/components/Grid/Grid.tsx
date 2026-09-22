@@ -6,8 +6,13 @@
  * file splits MUI's single component back into two thin wrappers: Grid always renders MUI's
  * `<Grid container>`, GridCol always renders a plain MUI `<Grid>` (item mode).
  *
- * Per the layout-components rule, both wrappers simply pass through MUI's own Grid props
- * (`size`, `offset`, `spacing`, `columns`, `direction`, `wrap`) with no Recursica renaming.
+ * Recursica's `layout-grids` tokens (column count, column-gutter, row-gutter, margin) are
+ * design-system-managed values, not integrator-facing settings — Grid applies them itself via
+ * CSS variables. MUI's own `spacing`/`columnSpacing`/`rowSpacing` props are no longer accepted;
+ * only `columns` (from `RecursicaGridProps` in `adapter-common`) is exposed as an override,
+ * matching how `Container.size` overrides its own token-backed default. See
+ * `IMPLEMENTATION_NOTES.md`.
+ *
  * MUI has no per-item "grow to fill remaining space" container flag like Mantine's `grow`;
  * use MUI's own `size="grow"` on individual columns instead. `visibleFrom`/`hiddenFrom`
  * don't exist in MUI at all, so — per the rule that a missing kit feature is built following
@@ -27,11 +32,14 @@
 import { forwardRef, type CSSProperties } from "react";
 import { Grid as MuiGrid, type GridProps as MuiGridProps } from "@mui/material";
 import {
-  SPACING_MAP,
   type OmitSx,
   filterSxProp,
   type WithRecursicaSpacing,
 } from "../../utils/filterStylingProps";
+import {
+  type RecursicaGridColProps,
+  type RecursicaGridProps,
+} from "@recursica/adapter-common";
 import styles from "./Grid.module.css";
 
 type Breakpoint = "xs" | "sm" | "md" | "lg" | "xl";
@@ -57,37 +65,55 @@ const VISIBLE_FROM_CLASS: Partial<Record<Breakpoint, string>> = {
 // ============================================================
 
 export type GridProps = WithRecursicaSpacing<
-  OmitSx<Omit<MuiGridProps, "container" | "justifyContent" | "alignItems">>
-> & {
-  /** Sets `justify-content` on the container. Applied via inline style — see notes above. */
-  justifyContent?: CSSProperties["justifyContent"];
-  /** Sets `align-items` on the container. Applied via inline style — see notes above. */
-  alignItems?: CSSProperties["alignItems"];
-};
+  OmitSx<
+    Omit<
+      MuiGridProps,
+      | "container"
+      | "justifyContent"
+      | "alignItems"
+      | "spacing"
+      | "columnSpacing"
+      | "rowSpacing"
+      | "columns"
+    >
+  >
+> &
+  RecursicaGridProps & {
+    /** Sets `justify-content` on the container. Applied via inline style — see notes above. */
+    justifyContent?: CSSProperties["justifyContent"];
+    /** Sets `align-items` on the container. Applied via inline style — see notes above. */
+    alignItems?: CSSProperties["alignItems"];
+  };
 
 const GridBase = forwardRef<HTMLDivElement, GridProps>(function Grid(
-  {
-    children,
-    spacing = "rec-default",
-    justifyContent,
-    alignItems,
-    style,
-    ...rest
-  },
+  { children, columns, justifyContent, alignItems, style, ...rest },
   ref,
 ) {
-  const safeProps = filterSxProp(rest as Record<string, unknown>);
-  const resolvedSpacing =
-    typeof spacing === "string" && spacing in SPACING_MAP
-      ? SPACING_MAP[spacing as keyof typeof SPACING_MAP]
-      : spacing;
+  // `spacing`/`columnSpacing`/`rowSpacing` are no longer supported props — column-gutter and
+  // row-gutter are design-system-managed (see below), dropped defensively here so a caller still
+  // passing one of the old prop names at runtime can't shadow the token-driven values passed to
+  // MUI below.
+  const restWithoutSpacing = { ...rest } as Record<string, unknown>;
+  delete restWithoutSpacing.spacing;
+  delete restWithoutSpacing.columnSpacing;
+  delete restWithoutSpacing.rowSpacing;
+
+  const safeProps = filterSxProp(restWithoutSpacing);
+
+  // `columns` has no design-system default baked into MUI's own Grid (it defaults to 12) — the
+  // design system default is applied here as a JS default rather than wired live through CSS.
+  // Sourced from --recursica_brand_layout-grids_default_columns. Callers may still override it
+  // (see `CustomColumnCount` story).
+  const resolvedColumns = columns ?? 6;
 
   return (
     <MuiGrid
       ref={ref}
       {...(safeProps as unknown as MuiGridProps)}
       container
-      spacing={resolvedSpacing}
+      columns={resolvedColumns}
+      columnSpacing="var(--recursica_brand_layout-grids_default_column-gutter)"
+      rowSpacing="var(--recursica_brand_layout-grids_default_row-gutter)"
       className={styles.root}
       style={{ justifyContent, alignItems, ...(style as CSSProperties) }}
     >
@@ -101,16 +127,24 @@ GridBase.displayName = "Grid";
 // GRID.COL
 // ============================================================
 
+// TODO(grid-col-contract): `RecursicaGridColProps` currently only contributes `children` here —
+// `span`, `order`, `visibleFrom`, and `hiddenFrom` are all drafted in that type (adapter-common)
+// but commented out for now (2026-09-22, Matt — paused, see the migration doc). This component's
+// own `order`/`visibleFrom`/`hiddenFrom` fields below stay exactly as they were (MUI-native
+// vocabulary, hand-built, no shared contract behind them yet) — no rename, no new fields. Once
+// `RecursicaGridColProps` picks `span`/`order`/`visibleFrom`/`hiddenFrom` back up, this repo's own
+// `size` prop will need a breaking rename to `span` to match. See IMPLEMENTATION_NOTES.md.
 export type GridColProps = WithRecursicaSpacing<
   OmitSx<Omit<MuiGridProps, "container" | "order">>
-> & {
-  /** Sets the CSS `order` property. Applied via inline style — see notes above. */
-  order?: number;
-  /** Hides the column below the given breakpoint. MUI has no native equivalent. */
-  visibleFrom?: Breakpoint;
-  /** Hides the column above the given breakpoint. MUI has no native equivalent. */
-  hiddenFrom?: Breakpoint;
-};
+> &
+  RecursicaGridColProps & {
+    /** Sets the CSS `order` property. Applied via inline style — see notes above. */
+    order?: number;
+    /** Hides the column below the given breakpoint. MUI has no native equivalent. */
+    visibleFrom?: Breakpoint;
+    /** Hides the column above the given breakpoint. MUI has no native equivalent. */
+    hiddenFrom?: Breakpoint;
+  };
 
 export const GridCol = forwardRef<HTMLDivElement, GridColProps>(
   function GridCol(
