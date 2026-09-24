@@ -7,8 +7,6 @@
 
   /* Recursica Layout Overrides mapped down dynamically from components */
   padding: 0; /* Hardcoded structural reset */
-  max-width: var(--form-control-max-width);
-  min-width: var(--form-control-min-width);
 }
 
 /* =========================================
@@ -88,5 +86,10 @@
   display: flex; /* Groups internal field alongside subsequent errors/descriptions */
   flex-direction: column;
   flex: 1; /* Consumes the remaining x-axis in grid columns natively */
-  min-width: 0; /* Break boundary preventing internal flex explosion */
+  /* Constrains only the control itself, never the label in .leftSection. */
+  max-width: var(--form-control-max-width, 100%);
+  min-width: var(
+    --form-control-min-width,
+    0
+  ); /* Break boundary preventing internal flex explosion */
 }
