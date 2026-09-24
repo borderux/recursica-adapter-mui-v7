@@ -5,11 +5,13 @@ import { type RecursicaOverStyled } from "../../utils/filterStylingProps";
 import { type RecursicaHeadingProps } from "@recursica/adapter-common";
 
 export type HeadingProps = RecursicaOverStyled<
-  Omit<MuiTypographyProps, "variant" | "classes"> & RecursicaHeadingProps
+  Omit<MuiTypographyProps, "variant" | "classes" | "color"> &
+    RecursicaHeadingProps,
+  "color"
 >;
 
 export const Heading = forwardRef<HTMLElement, HeadingProps>(function Heading(
-  { order = 1, component, ...rest },
+  { order = 1, component, emphasis = "high", color = "default", ...rest },
   ref,
 ) {
   const typographyClass = `recursica_brand_typography_h${order}`;
@@ -20,6 +22,8 @@ export const Heading = forwardRef<HTMLElement, HeadingProps>(function Heading(
       ref={ref}
       typographyClass={typographyClass}
       component={component || defaultComponent}
+      data-color={color}
+      data-emphasis={emphasis}
       {...rest}
     />
   );
