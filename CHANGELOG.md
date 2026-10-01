@@ -1,5 +1,18 @@
 # @recursica/adapter-mui-v7
 
+## 1.1.0
+
+### Minor Changes
+
+- 04b5efa: Text and Heading now support `color`/`emphasis` props; fixed FormControlLayout squeezing the whole label+control row (instead of just the control) when `controlMaxWidth`/`controlMinWidth` is set. Also synced the Forge token export to 0.28.2 and bumped `@recursica/adapter-tester` to `^5.2.0`.
+- afb5d25: `Grid.Col`'s type now intersects with `RecursicaGridColProps` from `adapter-common`, laying the groundwork for a formal cross-adapter contract. No behavior or prop changes yet — `size`, `order`, `visibleFrom`, and `hiddenFrom` all stay on this adapter's own MUI-native typing for now; the shared contract only carries `children` until `adapter-common` picks those back up.
+- afb5d25: `Grid` now wires the design system's `layout-grids` tokens: defaults to 6 columns with column-gutter/row-gutter/margin values applied automatically (previously an unstyled pass-through of MUI's own 12-column default). **Breaking:** `spacing`/`columnSpacing`/`rowSpacing` are no longer accepted — column-gutter/row-gutter/margin are design-system-managed, not integrator-configurable. `columns` remains the one Recursica-contract override, matching `Container.size`.
+
+### Patch Changes
+
+- afb5d25: Bumped `@recursica/adapter-common` to `^0.31.0`, which publishes `RecursicaGridProps`/`RecursicaGridColProps` (needed to wire the new Grid layout-grid tokens in this release).
+- afb5d25: Updated `recursica_brand.json`/`recursica_tokens.json`/`recursica_ui-kit.json`/`recursica_variables_scoped.css` to the 2026-09-21 Forge export (see mantine-v8's `docs/migration/2026-09-21-forge-token-export.md` for the full findings). No component CSS changes required — confirmed zero layer violations and zero broken/missing variables.
+
 ## 1.0.4
 
 ### Patch Changes
