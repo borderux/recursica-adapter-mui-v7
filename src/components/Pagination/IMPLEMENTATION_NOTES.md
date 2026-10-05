@@ -1,40 +1,44 @@
 # Pagination Implementation Notes
 
-- **Compositional API Dropped:** Mantine's original `Pagination` component relies heavily on dot-notation sub-components (`Pagination.Root`, `Pagination.Items`, `Pagination.Control`, etc.). MUI's `<Pagination>` is fundamentally monolithic. Following architectural review, we have decided to drop the dot-notation wrappers for `adapter-mui-v7` and rely strictly on MUI's monolithic API. Storybook and visual regression tests have been updated to reflect this divergence while retaining core property mapping compatibility.
+## Architecture: Recursica Buttons driven by the manifest
 
-## `renderItem` was never wired up (source-of-truth audit, 2026-08-30)
+Forge's `ui-kit.components.pagination` defines its page and navigation controls as `Button`
+variants (`active-pages`, `inactive-pages`, `navigation-controls`, each with a `selected-variants`
+style and size). Pagination therefore renders Recursica `Button`s with those props and does no
+button styling of its own: radius, padding, colors, hover and disabled all come from `Button`.
+(Before 2026-10-05 it restyled MUI's `PaginationItem` by hand with copies of the Button tokens.)
 
-`Pagination.module.css` already had complete, correctly-tokenized rules for `.control` (the
-circle/pill for every page/nav item), `.dots` (the ellipsis), `.iconWithLabel`, and `.baseIcon` —
-and `Pagination.icons.tsx` already had `PaginationIcon` plus `NextWithLabel`/`PrevWithLabel`/
-`FirstWithLabel`/`LastWithLabel` fully built. None of it was ever applied: `Pagination.tsx` only
-mapped MUI `Pagination`'s top-level `classes` prop (`root`/`ul` — the _only_ two slots MUI's own
-`Pagination` component exposes) and silently discarded the `withLabels` prop entirely. Every
-page/nav button rendered as MUI's own completely unstyled default `PaginationItem` — explaining
-the whole cluster of reported issues at once: undersized circles (no `.control` height/width),
-grey selected state and missing outline (no `.control`/`[data-active]` colors), wrong font color,
-default MUI arrow icons in the wrong color (no `PaginationIcon`), default ripple (MUI's
-`PaginationItem` uses `ButtonBase` with ripple enabled by default), and no text labels ever
-possible (`withLabels` was read and thrown away).
+- `Pagination` reads the selected `style` and `size` per role from the manifest with
+  `useRecursicaManifest()` (`adapter-common`), provided by `RecursicaThemeProvider`'s `manifest`
+  prop. It throws if there is no manifest or if a role has no `selected-variants`. The values are
+  passed to `Button` as is, with no validation and no fallbacks.
+- `content` (`label`, `icon-label`, `icon-only`) is not read: `Button` derives it from its own
+  children and icon, so page numbers are `label` and the navigation buttons are `icon-only`
+  (`icon-label` with `withLabels`).
 
-**Fix:** `Pagination.tsx` now passes a `renderItem` to `MuiPagination` that renders every item as
-`<PaginationItem className={styles.control} data-active={item.selected} data-variant={isNavigation
-? "text" : undefined} disableRipple slots={...} />` (ellipsis items get `styles.dots` instead).
-`slots.first/last/next/previous` point at `PaginationIcon` (plain) or the `*WithLabel` components
-(when `withLabels` is true) — both were already correctly built to work as MUI `PaginationItem`
-icon slots (only the icon itself receives MUI's forwarded className/props via `{...props}` spread
-onto the inner `PaginationIcon`, not the outer label-wrapping `<div>`, so the label text isn't
-constrained by MUI's icon-sized styled wrapper).
+## Why `usePagination`, not MUI's `Pagination`
 
-Also added a local `--pagination-control-size` bridge variable (bound to the Button height token
-`.control` is already sized from) — `.baseIcon`'s `calc(var(--pagination-control-size) / 1.8)`
-was copied verbatim from mantine-adapter, where `--pagination-control-size` is a _native_ Mantine
-CSS variable Mantine's own `Pagination` stamps onto the DOM already; MUI has no equivalent, so
-the calc silently resolved to `NaN`/`0` here until this bridge was added.
+MUI's `Pagination`/`PaginationItem` render their own `ButtonBase`, which can't be swapped for our
+`Button`. The component is built on MUI's `usePagination` hook instead (page state, ranges,
+siblings/boundaries, first/previous/next/last items and their disabled state) and maps each item to
+a `Button`. The MUI-vocabulary props `page`, `defaultPage`, `onChange(event, page)`, `siblingCount`,
+`boundaryCount` and `disabled` are kept; other `PaginationProps` (`shape`, `variant`, `color`,
+`size`, `renderItem`, ...) are no longer accepted.
 
-**Residual, not fixed:** the previous/next chevron control renders ~3.8px wider in mantine
-(51.8px vs. mui's exact 48px square) — mantine's own icon-only nav button apparently doesn't
-collapse fully to `min-width` the way mui's `PaginationItem` does. Pixel-matched everywhere else
-(page-number circle size/color/border, selected state, ellipsis centering, chevron colors, hover
-treatment, ripple removal, text labels) — not investigated further given the small, cosmetic
-scope of this one remaining gap.
+There are no dot-notation parts (`Pagination.Root`, `Items`, ...); the Mantine adapter has them.
+`getItemProps(page)` and `getControlProps(control)` are the override hooks for page and
+navigation buttons, and `dotsIcon` replaces the ellipsis.
+
+## Labels
+
+`withLabels` adds a text label to each navigation button. `First`/`Previous` put the icon first
+(`Button`'s `icon`); `Next`/`Last` put it after the label (`endIcon`, wrapped in `.rightIcon` and
+sized to the Button's icon token via `[data-size]` in `Pagination.module.css`).
+
+## Styling
+
+`Pagination.module.css` only lays out the row (`item-gap`) and styles the dots (`dots-color`).
+
+- The root is a `<nav aria-label="Pagination">` landmark, and each page button has `aria-label="Page N"`
+  (`Previous page`, `Next page`, etc. for the navigation buttons). Both can be overridden by props.
+- The ref is an `HTMLElement` (the `<nav>`).

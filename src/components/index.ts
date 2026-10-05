@@ -24,7 +24,7 @@ export * from "./Flex";
 export * from "./FormControlLayout";
 export * from "./FormControlWrapper";
 export type { RecursicaFormControlWrapperProps } from "./FormControlWrapper";
-export * from "./Grid";
+export * from "./LayoutGrid";
 export * from "./Group";
 export * from "./Heading";
 export * from "./HoverCard";

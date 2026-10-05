@@ -19,7 +19,13 @@ import React from "react";
 import { Pagination } from "@recursica/adapter-mui-v7";
 
 export default function Demo() {
-  return <Pagination total={10} value={activePage} onChange={setPage} />;
+  return (
+    <Pagination
+      total={10}
+      page={activePage}
+      onChange={(_, page) => setPage(page)}
+    />
+  );
 }
 ```
 
@@ -31,6 +37,7 @@ All Recursica components in the `@recursica/adapter-mui-v7` package adhere stric
 
 > [!IMPORTANT]
 >
+> - **Requires the manifest**: Pagination reads which Button `style` and `size` to use for its pages and navigation controls from the Forge manifest, so `RecursicaThemeProvider` must be given `manifest={manifest}` (the parsed `recursica_manifest.json`). It throws without it. See [SETUP.md](../../../SETUP.md).
 > - **Anti-override protection**: Rogues style injections (like inline `style` or arbitrary `className`) are automatically blocked by our prop layer unless `overStyled={true}` is explicitly provided.
 > - **No Direct Layers**: Do not pass a `layer` prop to this component. To place it on a specific visual layer, wrap it in a `<Layer layer={0|1|2|3}>` component natively.
 > - **Variables and Theming**: Styling is entirely determined by local CSS variables defined in `recursica_variables_scoped.css` and mapped in the component's CSS module.

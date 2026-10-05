@@ -22,7 +22,9 @@ const basePreview = createPreviewConfig({
 
 import recursicaTheme from "./RecursicaTheme";
 import { BLOCKED_STYLING_KEYS } from "../src/utils/filterStylingProps";
-import { Layer } from "@recursica/adapter-common";
+import { Layer, RecursicaManifestContext } from "@recursica/adapter-common";
+import { breakpointsFromRecManifest } from "../src/utils/breakpointsFromRecManifest";
+import recursicaManifest from "../recursica_manifest.json";
 
 // Dynamically map table disable directives globally for all blocked CSS props
 const globalArgTypes = [
@@ -36,6 +38,15 @@ const globalArgTypes = [
   },
   {} as Record<string, { table: { disable: boolean } }>,
 );
+
+// Forge's layout grids switch at their own widths; MUI's responsive props switch at the theme's.
+// Merging the manifest's breakpoints over MUI's defaults keeps the two in step.
+const breakpoints = {
+  values: {
+    ...createTheme().breakpoints.values,
+    ...breakpointsFromRecManifest(recursicaManifest),
+  },
+};
 
 const preview: Preview = {
   ...basePreview,
@@ -101,6 +112,7 @@ const preview: Preview = {
           <ThemeProvider
             theme={createTheme({
               colorSchemes: { light: true, dark: true },
+              breakpoints,
               // No Recursica token governs raw/untokenized body text (every component's
               // own font-family is a per-component token — see recursica_variables_scoped.css).
               // Left alone, MUI's own default (Roboto) would diverge from Mantine's own
@@ -115,18 +127,20 @@ const preview: Preview = {
             })}
           >
             <CssBaseline />
-            <ColorSchemeWrapper>
-              {withLayer ? (
-                <Layer
-                  layer={layer as 0 | 1 | 2 | 3}
-                  style={{ padding: "48px" }}
-                >
-                  {content}
-                </Layer>
-              ) : (
-                content
-              )}
-            </ColorSchemeWrapper>
+            <RecursicaManifestContext.Provider value={recursicaManifest}>
+              <ColorSchemeWrapper>
+                {withLayer ? (
+                  <Layer
+                    layer={layer as 0 | 1 | 2 | 3}
+                    style={{ padding: "48px" }}
+                  >
+                    {content}
+                  </Layer>
+                ) : (
+                  content
+                )}
+              </ColorSchemeWrapper>
+            </RecursicaManifestContext.Provider>
           </ThemeProvider>
         </StyledEngineProvider>
       );
