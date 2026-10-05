@@ -36,6 +36,7 @@ All Recursica components in the `@recursica/adapter-mui-v7` package adhere stric
 
 > [!IMPORTANT]
 >
-> - **Anti-override protection**: Rogues style injections (like inline `style` or arbitrary `className`) are automatically blocked by our prop layer unless `overStyled={true}` is explicitly provided.
 > - **No Direct Layers**: Do not pass a `layer` prop to this component. To place it on a specific visual layer, wrap it in a `<Layer layer={0|1|2|3}>` component natively.
 > - **Variables and Theming**: Styling is entirely determined by local CSS variables defined in `recursica_variables_scoped.css` and mapped in the component's CSS module.
+
+> [!NOTE] > **Responsive props use your MUI theme's breakpoints, not Forge's.** Keys such as `{ xs, sm, md }` come from `theme.breakpoints`; Forge's layout grids switch via plain CSS `@media` and never edit the MUI theme. Build your theme with `breakpointsFromRecManifest` so the two agree (see [LayoutGrid](../LayoutGrid/USAGE.md)).
