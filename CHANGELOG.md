@@ -1,6 +1,6 @@
 # @recursica/adapter-mui-v7
 
-## 2.0.0
+## 1.3.0
 
 ### Major Changes
 
