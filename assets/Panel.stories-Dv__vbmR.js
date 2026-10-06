@@ -1,0 +1,148 @@
+import{r as u,j as e}from"./iframe-beV37eeO.js";import{P as o}from"./Panel-OdKXoRAx.js";import{B as n}from"./Button-BGe1abBg.js";import{T as h}from"./Text-C4AvNtx6.js";import"./preload-helper-Dp1pzeXC.js";import"./styled-CNpxuHUQ.js";import"./useTheme-gzZmB1ZM.js";import"./memoTheme-vXn-YBfG.js";import"./useSlot-IfuFELkD.js";import"./mergeSlotProps-D8nLVVOB.js";import"./isHostComponent-DVu5iVWx.js";import"./useForkRef-Bv06npf_.js";import"./Modal-G9j5pfoy.js";import"./ownerWindow-HkKU3E4x.js";import"./ownerDocument-DW-IO8s5.js";import"./useEventCallback-CrvErcws.js";import"./createChainedFunction-BO_9K8Jh.js";import"./Portal-Dvamfm51.js";import"./index-Br2fro_4.js";import"./index-JFY2e-kN.js";import"./getActiveElement-BwNsGdKK.js";import"./contains-B5PScIlI.js";import"./utils-Bunx8Sjt.js";import"./useTimeout-CjQmtG6Z.js";import"./mergeSlotProps-DSwM6dkZ.js";import"./debounce-Be36O1Ab.js";import"./Paper-pnhErv6X.js";import"./IconButton-DqpkcmbJ.js";import"./createSimplePaletteValueFilter-bm0fmN_7.js";import"./ButtonBase-Doawacpa.js";import"./isFocusVisible-B8k4qzLc.js";import"./CircularProgress-CDXBtpvi.js";import"./Loader-X9-8j_Us.js";import"./Button-C1a5A209.js";import"./Typography-DcAf2Y0K.js";import"./Typography-Cqcnnde3.js";const de={title:"UI-Kit/Panel",component:o,tags:["autodocs"],argTypes:{placement:{control:"select",options:["left","right","top","bottom"],description:"Side of the screen the panel slides in from."},title:{control:"text",description:"Panel title displayed in the header."},withOverlay:{control:"boolean",description:"Whether to display a background overlay."},withCloseButton:{control:"boolean",description:"Whether to display the close button in the header."},wrapHeaderText:{control:"boolean",description:"If true, forces the header text to a single line and truncates with an ellipsis."},defaultChecked:{table:{disable:!0}},defaultValue:{table:{disable:!0}},suppressContentEditableWarning:{table:{disable:!0}},suppressHydrationWarning:{table:{disable:!0}}},parameters:{layout:"fullscreen",docs:{description:{component:`
+The \`Panel\` component slides in or expands from the edge of the screen to reveal additional content or functionality. Built on Mui's \`Drawer\`, it enforces Recursica design tokens for styling.
+
+### Anatomy
+1. **Header** — Title and close icon, remains fixed on scroll
+2. **Divider** — Separates header/footer from content
+3. **Body (Slot)** — Scrollable content area for custom content
+4. **Footer** — Fixed action buttons (Recursica-specific)
+
+### Usage
+\`\`\`tsx
+const [opened, { open, close }] = useDisclosure(false);
+
+<Button onClick={open}>Open Panel</Button>
+<Panel opened={opened} onClose={close} title="Settings" placement="right">
+  Content goes here
+  <Panel.Footer>
+    <Button variant="outline">Cancel</Button>
+    <Button variant="solid">Save</Button>
+  </Panel.Footer>
+</Panel>
+\`\`\`
+        `}}}},i={args:{placement:"right",title:"Panel Title",withOverlay:!0,withCloseButton:!0,wrapHeaderText:!1},render:({wrapHeaderText:s,...l})=>{const[t,r]=u.useState(!0);return e.jsxs(e.Fragment,{children:[e.jsx(n,{variant:"solid",onClick:()=>r(!0),children:"Open Panel"}),e.jsxs(o,{...l,opened:t,onClose:()=>r(!1),title:"Panel Title",placement:"right",wrapHeaderText:s,children:[e.jsx(h,{children:"This is the panel body content area. Panels slide in from the edge of the screen to reveal supplementary information, navigation options, or toolsets."}),e.jsxs(o.Footer,{children:[e.jsx(n,{variant:"outline",onClick:()=>r(!1),children:"Cancel"}),e.jsx(n,{variant:"solid",children:"Save"})]})]})]})}},p={args:{placement:"left",title:"Navigation",withOverlay:!0,withCloseButton:!0,wrapHeaderText:!1},render:({withLayer:s,layer:l,...t})=>{const[r,a]=u.useState(!0);return e.jsxs(e.Fragment,{children:[e.jsx(n,{variant:"outline",onClick:()=>a(!0),children:"Open Left Panel"}),e.jsx(o,{...t,opened:r,onClose:()=>a(!1),children:e.jsx(h,{children:"A panel sliding in from the left, commonly used for navigation menus or sidebars."})})]})}},d={args:{placement:"right",title:"Scrollable Panel",withOverlay:!0,withCloseButton:!0,wrapHeaderText:!1},render:({withLayer:s,layer:l,...t})=>{const[r,a]=u.useState(!0);return e.jsxs(e.Fragment,{children:[e.jsx(n,{variant:"solid",onClick:()=>a(!0),children:"Open Scrollable Panel"}),e.jsxs(o,{...t,opened:r,onClose:()=>a(!1),children:[Array.from({length:20}).map((S,m)=>e.jsxs("p",{style:{marginBottom:"1rem"},children:["Paragraph ",m+1,": This is sample content to demonstrate the scrollable behavior of the panel when content exceeds the viewport height."]},m)),e.jsxs(o.Footer,{children:[e.jsx(n,{variant:"outline",onClick:()=>a(!1),children:"Close"}),e.jsx(n,{variant:"solid",children:"Apply"})]})]})]})}},c={args:{placement:"right",title:"This is a ridiculously long panel title designed to test how the header CSS handles text overflow and whether it truncates correctly or breaks the layout",withOverlay:!0,withCloseButton:!0,wrapHeaderText:!0},render:({...s})=>{const[l,t]=u.useState(!0);return e.jsxs(e.Fragment,{children:[e.jsx(n,{variant:"solid",onClick:()=>t(!0),children:"Open Long Title Panel"}),e.jsx(o,{...s,opened:l,onClose:()=>t(!1),children:e.jsx(h,{children:"Check the header to see if the long title is handled gracefully without pushing the close button off screen."})})]})}},ce=["Default","LeftPlacement","ScrollableContent","LongTitle"];var g,f,x;i.parameters={...i.parameters,docs:{...(g=i.parameters)==null?void 0:g.docs,source:{originalSource:`{
+  args: {
+    placement: "right",
+    title: "Panel Title",
+    withOverlay: true,
+    withCloseButton: true,
+    wrapHeaderText: false
+  },
+  render: ({
+    wrapHeaderText,
+    ...args
+  }: PanelStoryArgs) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [opened, setOpened] = useState(true);
+    return <>
+        <Button variant="solid" onClick={() => setOpened(true)}>
+          Open Panel
+        </Button>
+        <Panel {...args as PanelProps} opened={opened} onClose={() => setOpened(false)} title="Panel Title" placement="right" wrapHeaderText={wrapHeaderText}>
+          <Text>
+            This is the panel body content area. Panels slide in from the edge
+            of the screen to reveal supplementary information, navigation
+            options, or toolsets.
+          </Text>
+          <Panel.Footer>
+            <Button variant="outline" onClick={() => setOpened(false)}>
+              Cancel
+            </Button>
+            <Button variant="solid">Save</Button>
+          </Panel.Footer>
+        </Panel>
+      </>;
+  }
+}`,...(x=(f=i.parameters)==null?void 0:f.docs)==null?void 0:x.source}}};var y,P,v;p.parameters={...p.parameters,docs:{...(y=p.parameters)==null?void 0:y.docs,source:{originalSource:`{
+  args: {
+    placement: "left",
+    title: "Navigation",
+    withOverlay: true,
+    withCloseButton: true,
+    wrapHeaderText: false
+  },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  render: ({
+    withLayer,
+    layer,
+    ...args
+  }: PanelStoryArgs) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [opened, setOpened] = useState(true);
+    return <>
+        <Button variant="outline" onClick={() => setOpened(true)}>
+          Open Left Panel
+        </Button>
+        <Panel {...args as PanelProps} opened={opened} onClose={() => setOpened(false)}>
+          <Text>
+            A panel sliding in from the left, commonly used for navigation menus
+            or sidebars.
+          </Text>
+        </Panel>
+      </>;
+  }
+}`,...(v=(P=p.parameters)==null?void 0:P.docs)==null?void 0:v.source}}};var w,C,b;d.parameters={...d.parameters,docs:{...(w=d.parameters)==null?void 0:w.docs,source:{originalSource:`{
+  args: {
+    placement: "right",
+    title: "Scrollable Panel",
+    withOverlay: true,
+    withCloseButton: true,
+    wrapHeaderText: false
+  },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  render: ({
+    withLayer,
+    layer,
+    ...args
+  }: PanelStoryArgs) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [opened, setOpened] = useState(true);
+    return <>
+        <Button variant="solid" onClick={() => setOpened(true)}>
+          Open Scrollable Panel
+        </Button>
+        <Panel {...args as PanelProps} opened={opened} onClose={() => setOpened(false)}>
+          {Array.from({
+          length: 20
+        }).map((_, i) => <p key={i} style={{
+          marginBottom: "1rem"
+        }}>
+              Paragraph {i + 1}: This is sample content to demonstrate the
+              scrollable behavior of the panel when content exceeds the viewport
+              height.
+            </p>)}
+          <Panel.Footer>
+            <Button variant="outline" onClick={() => setOpened(false)}>
+              Close
+            </Button>
+            <Button variant="solid">Apply</Button>
+          </Panel.Footer>
+        </Panel>
+      </>;
+  }
+}`,...(b=(C=d.parameters)==null?void 0:C.docs)==null?void 0:b.source}}};var B,O,T;c.parameters={...c.parameters,docs:{...(B=c.parameters)==null?void 0:B.docs,source:{originalSource:`{
+  args: {
+    placement: "right",
+    title: "This is a ridiculously long panel title designed to test how the header CSS handles text overflow and whether it truncates correctly or breaks the layout",
+    withOverlay: true,
+    withCloseButton: true,
+    wrapHeaderText: true
+  },
+  render: ({
+    ...args
+  }: PanelStoryArgs) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [opened, setOpened] = useState(true);
+    return <>
+        <Button variant="solid" onClick={() => setOpened(true)}>
+          Open Long Title Panel
+        </Button>
+        <Panel {...args as PanelProps} opened={opened} onClose={() => setOpened(false)}>
+          <Text>
+            Check the header to see if the long title is handled gracefully
+            without pushing the close button off screen.
+          </Text>
+        </Panel>
+      </>;
+  }
+}`,...(T=(O=c.parameters)==null?void 0:O.docs)==null?void 0:T.source}}};export{i as Default,p as LeftPlacement,c as LongTitle,d as ScrollableContent,ce as __namedExportsOrder,de as default};
