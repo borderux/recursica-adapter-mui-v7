@@ -294,9 +294,6 @@ export const WithSubmenus: Story = {
   ),
   args: {
     opened: true,
-    // Match mantine's explicit `width: 200` for this story so the row has room for the
-    // "Products"/"Orders" label plus the submenu chevron without clipping it.
-    slotProps: { paper: { style: { minWidth: 200 } } },
   },
 };
 

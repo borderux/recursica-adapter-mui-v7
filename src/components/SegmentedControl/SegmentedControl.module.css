@@ -147,6 +147,24 @@
   );
 }
 
+/* Vertical: cap the container radius to stay concentric with the pill items. */
+.root[data-orientation="vertical"] {
+  border-radius: min(
+    var(
+      --recursica_ui-kit_components_segmented-control_properties_border-radius
+    ),
+    calc(
+      var(
+          --recursica_ui-kit_components_segmented-control-item_properties_item_height
+        ) /
+        2 +
+        var(
+          --recursica_ui-kit_components_segmented-control_properties_padding-vertical
+        )
+    )
+  );
+}
+
 /* Indicator mapping (MUI ToggleButton applies .Mui-selected to the button instead of rendering a sliding indicator).
    Mui-selected must be wrapped in :global() — otherwise CSS Modules locally hashes it and the
    selector never matches MUI's actual global class (silently dropping the selected state). */

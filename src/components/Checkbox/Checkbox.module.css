@@ -21,7 +21,7 @@
 /* SideBySide Variant */
 .groupRoot[data-layout="side-by-side"] {
   flex-direction: column;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   padding-top: var(
     --recursica_ui-kit_components_checkbox-group_variants_layouts_side-by-side_properties_vertical-padding
   );
@@ -278,8 +278,6 @@
   );
 }
 .groupRoot[data-layout="side-by-side"] {
-  flex-direction: row;
-  flex-wrap: wrap;
   gap: var(
     --recursica_ui-kit_components_checkbox-group_variants_layouts_side-by-side_properties_gutter
   );
