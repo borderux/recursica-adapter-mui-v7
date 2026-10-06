@@ -119,7 +119,16 @@ const PanelBase = function Panel({
       {...(sanitizedProps as unknown as MuiDrawerProps)}
       classes={mergedClassNames as unknown as MuiDrawerProps["classes"]}
     >
-      <div className={styles.content}>
+      <div
+        className={`${styles.content} ${
+          {
+            right: styles.contentRight,
+            left: styles.contentLeft,
+            top: styles.contentTop,
+            bottom: styles.contentBottom,
+          }[placement]
+        }`}
+      >
         {(title || withCloseButton) && (
           <div className={styles.header}>
             {title && (
