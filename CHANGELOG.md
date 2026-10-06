@@ -1,5 +1,22 @@
 # @recursica/adapter-mui-v7
 
+## 2.0.0
+
+### Major Changes
+
+- 07418dd: `Pagination` now renders Recursica Buttons whose style and size come from the Forge manifest, so `RecursicaThemeProvider` needs the `manifest` prop or Pagination throws; MUI's `Pagination` props are no longer passed through.
+- 07418dd: `Grid` is now `LayoutGrid` (`LayoutGrid.Col`) and follows Forge's breakpoint-aware layout grids (columns, gutters, margin); it no longer accepts the `columns` prop. Use MUI's Grid directly for a fixed N-column grid.
+
+### Minor Changes
+
+- 07418dd: New opt-in `breakpointsFromRecManifest` builds MUI `theme.breakpoints.values` from the Forge manifest's layout grids.
+
+### Patch Changes
+
+- fbaba46: Updated @recursica/adapter-common, adapter-tester and storybook-template. FileUpload is capped at the form-field max-width, FileInput keeps a fixed height with a file, and vertical Stepper no longer adds extra step spacing.
+
+  Panel rounds only the corners facing the page and its width follows the Forge max-width token capped to the viewport. RadioGroup/CheckboxGroup side-by-side layouts stack vertically, vertical SegmentedControl uses a concentric container radius, and the Menu WithSubmenus story no longer forces a width.
+
 ## 1.1.0
 
 ### Minor Changes
