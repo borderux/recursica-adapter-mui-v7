@@ -74,6 +74,8 @@
 
 .sliderRoot {
   width: 100%;
+  /* MUI defaults the root to 4px, so the thumb overflows and the block collapses; match the thumb height. */
+  height: var(--recursica_ui-kit_components_slider_properties_thumb-size);
   box-sizing: border-box;
   color: inherit;
   font-family: inherit;
@@ -84,6 +86,7 @@
 
 .sliderTrack {
   height: var(--recursica_ui-kit_components_slider_properties_track-height);
+  opacity: 1; /* MUI fades the rail to 0.38 by default, which washes out the token color */
   border-radius: var(
     --recursica_ui-kit_components_slider_properties_track-border-radius
   );
@@ -249,6 +252,14 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+
+  /* The transform override above defeats MUI's scale(0) hiding, so hide until MUI marks it open. */
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sliderTooltip:global(.MuiSlider-valueLabelOpen) {
+  opacity: 1;
 }
 
 .sliderTooltip * {
