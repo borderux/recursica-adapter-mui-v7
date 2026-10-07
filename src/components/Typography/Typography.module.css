@@ -2,6 +2,8 @@
  * HARDCODED VALUES
  * - `.root` `text-wrap: balance` — not a design token; a layout algorithm choice requested by
  *   UX (Matt Massey, 2026-08-28) to even out wrapped line lengths. See TEXT_IMPLEMENTATION_NOTES.md.
+ * - `.root[data-typography-missing]` `visibility: hidden` — dev-only (the attribute is never set in
+ *   production); hides text whose typography variant has no exported style. Not a design token.
  *
  * Brand-layer exemptions (recursica-allow-brand) — see recursica-token-analyzer README.md.
  * Semantic text color and emphasis are layer/theme-level concerns with no per-component UI-kit
@@ -49,4 +51,10 @@
 
 .root[data-emphasis="low"] {
   opacity: var(--recursica_brand_text-emphasis_low);
+}
+
+/* Dev only (the attribute is never set in production): hides text whose typography variant has no
+   exported style, so a typo is obvious instead of rendering with the UI kit's defaults. */
+.root[data-typography-missing] {
+  visibility: hidden;
 }

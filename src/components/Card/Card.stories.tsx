@@ -3,6 +3,7 @@ import { Card } from "./Card";
 import { Layer } from "@recursica/adapter-common";
 import { Button } from "../Button/Button";
 import { Group } from "../Group/Group";
+import { Heading } from "../Heading/Heading";
 import { Text } from "../Text/Text";
 
 const meta: Meta<typeof Card> = {
@@ -78,7 +79,7 @@ export const HeaderlessAndFooterless: Story = {
         <Layer layer={0}>
           <Card {...args}>
             <Card.Content>
-              <Text variant="subtitle">Notice</Text>
+              <Heading order={6}>Notice</Heading>
               <Text>
                 This is a completely generic card payload dropping the Header
                 and Footer specific elements, simply acting as a padded
