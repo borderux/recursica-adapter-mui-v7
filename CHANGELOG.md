@@ -1,5 +1,11 @@
 # @recursica/adapter-mui-v7
 
+## 1.3.1
+
+### Patch Changes
+
+- 42e1374: Removed the `body-small`, `subtitle` and `subtitle-small` Text variants, which Forge never defined. In development, a Text variant with no exported style now logs an error and hides its text.
+
 ## 1.3.0
 
 ### Major Changes
