@@ -1,5 +1,11 @@
 # @recursica/adapter-mui-v7
 
+## 1.3.2
+
+### Patch Changes
+
+- 5c91534: Fixes Slider layout height and hides the value tooltip until the thumb is hovered or focused, matching mantine-v8.
+
 ## 1.3.1
 
 ### Patch Changes
