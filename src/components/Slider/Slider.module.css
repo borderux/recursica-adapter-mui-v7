@@ -86,6 +86,7 @@
 
 .sliderTrack {
   height: var(--recursica_ui-kit_components_slider_properties_track-height);
+  opacity: 1; /* MUI fades the rail to 0.38 by default, which washes out the token color */
   border-radius: var(
     --recursica_ui-kit_components_slider_properties_track-border-radius
   );
