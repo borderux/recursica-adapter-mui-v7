@@ -32,3 +32,5 @@ test-results
 test/golden/manifest.json.lock
 
 token-analysis.json
+# Vitest browser mode failure screenshots
+__screenshots__/

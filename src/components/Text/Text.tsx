@@ -11,10 +11,26 @@ export type TextProps = RecursicaOverStyled<
   "color"
 >;
 
+const HEADING_ELEMENTS = ["h1", "h2", "h3", "h4", "h5", "h6"];
+
 export const Text = forwardRef<HTMLElement, TextProps>(function Text(
   { variant = "body", emphasis = "high", color = "default", ...rest },
   ref,
 ) {
+  // Text never renders semantic h1-h6; those belong to Heading. MUI picks the element from
+  // `component`, or (for variant "inherit") from `variantMapping.inherit`, so check both.
+  const { component, variantMapping } = rest as {
+    component?: unknown;
+    variantMapping?: Record<string, unknown>;
+  };
+  for (const element of [component, variantMapping?.inherit]) {
+    if (typeof element === "string" && HEADING_ELEMENTS.includes(element)) {
+      throw new Error(
+        `Text cannot render <${element}>. Use <Heading> for semantic h1-h6.`,
+      );
+    }
+  }
+
   // Dev only: an unknown variant hides the text (and logs) instead of silently rendering with the
   // UI kit's default styling.
   const typographyMissing =
