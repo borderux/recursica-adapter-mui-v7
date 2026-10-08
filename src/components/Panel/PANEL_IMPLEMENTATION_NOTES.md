@@ -131,3 +131,11 @@ clips descenders (e.g. the "g" in a long title) whenever `text_line-height` is t
 font's natural ascent+descent. Switched to `overflow: clip; overflow-clip-margin: 0.35em;` — same
 truncation, but ink can bleed slightly past the line box before it's actually clipped.
 Project-wide fix; see Chip's `CHIP_IMPLEMENTATION_NOTES.md` for the original discovery.
+
+---
+
+## 10. Always non-modal (Matt Massey, 2026-10-08)
+
+**Decision:** Panel is never modal, and there are no props to change that.
+
+**Implementation:** The house rule is that the page behind a panel stays usable. `Panel.tsx` always renders MUI's Drawer with `variant="persistent"` (after the caller's props), which has no Modal: no backdrop, no focus trap, no scroll lock, no `aria-modal`, and no `aria-hidden` on the rest of the page. Because there is no Modal, `Panel.tsx` supplies the rest itself: a document `keydown` listener (while open) calls `onClose` on Escape, and focus returns to the opener (the element focused at open) on close. Escape is independent of outside clicks and always closes the panel; clicking the page behind never does. `withOverlay` and MUI's `variant`, `hideBackdrop`, `ModalProps`, `BackdropProps`/`BackdropComponent` and `disable*` (escape, scroll lock, enforce focus, auto focus, restore focus) props are omitted from `RecursicaPanelProps`. Every adapter must match.

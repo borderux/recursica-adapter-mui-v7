@@ -1,4 +1,4 @@
-import { forwardRef, type ReactNode } from "react";
+import { forwardRef, useEffect, useRef, type ReactNode } from "react";
 import {
   Drawer as MuiDrawer,
   type DrawerProps as MuiDrawerProps,
@@ -23,13 +23,26 @@ import { type RecursicaPanelProps as BaseRecursicaPanelProps } from "@recursica/
 export interface RecursicaPanelProps
   extends Omit<
       MuiDrawerProps,
-      "classes" | "position" | "style" | "anchor" | "open" | "title"
+      | "classes"
+      | "position"
+      | "style"
+      | "anchor"
+      | "open"
+      | "title"
+      | "variant"
+      | "hideBackdrop"
+      | "ModalProps"
+      | "BackdropComponent"
+      | "BackdropProps"
+      | "disableEscapeKeyDown"
+      | "disableScrollLock"
+      | "disableEnforceFocus"
+      | "disableAutoFocus"
+      | "disableRestoreFocus"
     >,
     BaseRecursicaPanelProps {
   /** Panel header title label. */
   title?: ReactNode;
-  /** Whether to display a background overlay. Default true. */
-  withOverlay?: boolean;
   /** Whether to display the close button in the header. Default true. */
   withCloseButton?: boolean;
 }
@@ -68,13 +81,18 @@ const CloseIcon = () => (
  * </Panel>
  * ```
  *
+ * Always non-modal, with no props to change it: the page behind stays usable
+ * (no overlay, focus trap, scroll lock, `aria-modal` or `aria-hidden` on the
+ * rest of the page), focus returns to the opener on close, Escape always
+ * closes, and outside clicks never do. Implemented with MUI's `persistent`
+ * Drawer variant (no Modal) plus an Escape listener and focus restoration.
+ *
  * Mui Drawer sub-components available via dot-notation:
  * - `Panel.Header` — Top section with title and close button
  * - `Panel.Title` — Title text within the header
  * - `Panel.CloseButton` — Close button within the header
  * - `Panel.Body` — Scrollable body content area
  * - `Panel.Content` — Outer content container
- * - `Panel.Overlay` — Background overlay
  * - `Panel.Root` — Root element for advanced composition
  * - `Panel.Stack` — Stacked drawer context
  */
@@ -85,13 +103,37 @@ const PanelBase = function Panel({
   wrapHeaderText = true,
   opened,
   title,
-  withOverlay = true,
   withCloseButton = true,
   onClose,
   children,
   ...rest
 }: PanelProps) {
   const sanitizedProps = filterStylingProps(rest, overStyled);
+  const isOpen = Boolean(opened);
+  const openerRef = useRef<HTMLElement | null>(null);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
+
+  // Non-modal: there is no Modal to handle Escape or focus restoration, so do both here.
+  useEffect(() => {
+    if (!isOpen) return;
+    openerRef.current = document.activeElement as HTMLElement | null;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onCloseRef.current?.(
+          e as unknown as React.SyntheticEvent,
+          "escapeKeyDown",
+        );
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      const opener = openerRef.current;
+      if (opener && opener.isConnected) opener.focus();
+      openerRef.current = null;
+    };
+  }, [isOpen]);
 
   // MUI Drawer's `classes` prop only recognizes its own slot names (`root`, `paper`,
   // `docked`, ...) — unlike Mantine's `classNames`, it has no `content`/`header`/`title`/`body`
@@ -113,10 +155,10 @@ const PanelBase = function Panel({
     <MuiDrawer
       anchor={placement} /* Recursica default: right; Mui default: left */
       keepMounted={keepMounted}
-      open={Boolean(opened)}
-      onClose={onClose}
-      hideBackdrop={!withOverlay}
+      open={isOpen}
       {...(sanitizedProps as unknown as MuiDrawerProps)}
+      /* Always non-modal: persistent variant has no backdrop, focus trap, scroll lock or aria-modal */
+      variant="persistent"
       classes={mergedClassNames as unknown as MuiDrawerProps["classes"]}
     >
       <div
