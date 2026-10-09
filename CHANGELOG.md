@@ -1,5 +1,18 @@
 # @recursica/adapter-mui-v7
 
+## 1.3.3
+
+### Patch Changes
+
+- bc44ebd: Updated `@recursica/storybook-template` to 0.7.16. The Adapters page now lists the Angular Material adapter.
+- e3928b0: Stop publishing Storybook story files, `.storybook/commonArgTypes.ts` and the recursica json/css files in the npm package.
+- eb70072: Panel is now always non-modal: the page behind stays usable, focus and scroll aren't trapped, and Escape always closes it. The overlay, focus, scroll and close-on-outside-click props were removed.
+- a97a32d: Add a "Why an Adapter?" section to PHILOSOPHY.md.
+- 91d7e1e: Fix the README Storybook link text to show the mui-v7 URL.
+- 5f7ed4c: Text now throws if `component` is `h1`-`h6`; use Heading for semantic headings.
+
+  Added an `AsElement` Text story.
+
 ## 1.3.2
 
 ### Patch Changes
