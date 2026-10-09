@@ -4,7 +4,7 @@ A modern React component library built with TypeScript and **MUI 7**. This packa
 
 ## Storybook & PR Previews
 
-You can view the current adapters Storybook at [https://borderux.github.io/recursica-adapter-mui-v8/](https://borderux.github.io/recursica-adapter-mui-v7/) Every pull request also gets its own preview build, deployed under `pr-preview/pr-<number>/` on the same site and linked automatically in the PR description. In order to create a preview though, your pull request must have the word **preview** in the title.
+You can view the current adapters Storybook at [https://borderux.github.io/recursica-adapter-mui-v7/](https://borderux.github.io/recursica-adapter-mui-v7/) Every pull request also gets its own preview build, deployed under `pr-preview/pr-<number>/` on the same site and linked automatically in the PR description. In order to create a preview though, your pull request must have the word **preview** in the title.
 
 ## Using Theme Forge to update styles
 
