@@ -31,8 +31,8 @@
   "files": [
     "dist",
     "src",
+    "!src/**/*.stories.tsx",
     "CHANGELOG.md",
-    ".storybook/commonArgTypes.ts",
     "llms.txt",
     "USAGE.md",
     "ARCHITECTURE.md",
