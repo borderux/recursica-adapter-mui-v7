@@ -159,7 +159,6 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
         classes={mergedClassNames}
         disabled={readOnly || disabled}
         disableRipple
-        sx={label ? { padding: 0 } : undefined}
       />
     );
 

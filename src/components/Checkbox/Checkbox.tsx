@@ -175,7 +175,6 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
         {...(isControlled ? { checked: isChecked as boolean } : {})}
         onChange={handleChange}
         disableRipple
-        sx={label ? { padding: 0 } : undefined}
         icon={<div className={styles.input} />}
         checkedIcon={
           <div className={`${styles.input} ${styles.inputChecked}`}>

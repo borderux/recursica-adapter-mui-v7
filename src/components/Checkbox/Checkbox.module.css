@@ -66,6 +66,7 @@
   align-items: center;
   justify-content: center;
   margin: 0; /* HARDCODE: structural reset */
+  padding: 0; /* HARDCODE: drops MUI's 9px SwitchBase padding, which would crush the box inside the fixed size */
   width: var(--recursica_ui-kit_components_checkbox_properties_size);
   height: var(--recursica_ui-kit_components_checkbox_properties_size);
   /* Apply font-size to this element so that an 'em' based line-height token evaluates to the correct exact pixel value. */
