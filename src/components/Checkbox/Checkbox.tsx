@@ -21,6 +21,7 @@ import {
 } from "../FormControlLayout/FormControlLayout";
 import { AssistiveElement } from "../AssistiveElement/AssistiveElement";
 
+import { useNativeInputA11y } from "../../utils/useNativeInputA11y";
 import styles from "./Checkbox.module.css";
 
 export type CheckboxWrapperProps = Omit<MuiCheckboxProps, "size" | "color"> &
@@ -67,9 +68,12 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
       "color", // Colors are token-driven; MUI's native palette isn't exposed
     ] as const satisfies readonly (keyof MuiCheckboxProps)[];
 
-    const sanitizedProps = omitUnsupportedProps(
-      filterStylingProps(rest, overStyled),
-      UNSUPPORTED_PROPS,
+    const sanitizedProps = useNativeInputA11y(
+      omitUnsupportedProps(
+        filterStylingProps(rest, overStyled),
+        UNSUPPORTED_PROPS,
+      ),
+      !!label,
     );
     const restRecord = sanitizedProps as Record<string, unknown>;
 
@@ -175,7 +179,6 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
         {...(isControlled ? { checked: isChecked as boolean } : {})}
         onChange={handleChange}
         disableRipple
-        sx={label ? { padding: 0 } : undefined}
         icon={<div className={styles.input} />}
         checkedIcon={
           <div className={`${styles.input} ${styles.inputChecked}`}>

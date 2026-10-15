@@ -21,6 +21,7 @@ import {
 } from "../FormControlLayout/FormControlLayout";
 import { AssistiveElement } from "../AssistiveElement/AssistiveElement";
 
+import { useNativeInputA11y } from "../../utils/useNativeInputA11y";
 import styles from "./Radio.module.css";
 
 const RadioIcon: React.FC<{
@@ -81,9 +82,12 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
       "color", // Colors are token-driven; MUI's native palette isn't exposed
     ] as const satisfies readonly (keyof MuiRadioProps)[];
 
-    const sanitizedProps = omitUnsupportedProps(
-      filterStylingProps(rest, overStyled),
-      UNSUPPORTED_PROPS,
+    const sanitizedProps = useNativeInputA11y(
+      omitUnsupportedProps(
+        filterStylingProps(rest, overStyled),
+        UNSUPPORTED_PROPS,
+      ),
+      !!label,
     );
     const restRecord = sanitizedProps as Record<string, unknown>;
 
@@ -159,7 +163,6 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(
         classes={mergedClassNames}
         disabled={readOnly || disabled}
         disableRipple
-        sx={label ? { padding: 0 } : undefined}
       />
     );
 

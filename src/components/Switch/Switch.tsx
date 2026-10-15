@@ -20,6 +20,7 @@ import {
   type FormControlLayoutProps,
 } from "../FormControlLayout/FormControlLayout";
 import { AssistiveElement } from "../AssistiveElement/AssistiveElement";
+import { useNativeInputA11y } from "../../utils/useNativeInputA11y";
 import styles from "./Switch.module.css";
 
 import { SwitchGroup, SwitchGroupContext } from "./SwitchGroup";
@@ -110,9 +111,12 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       "color", // Recursica hardcodes color="default" below; MUI's palette-driven colors are unused
     ] as const satisfies readonly (keyof MuiSwitchProps)[];
 
-    const sanitizedProps = omitUnsupportedProps(
-      filterStylingProps(rest, overStyled),
-      UNSUPPORTED_PROPS,
+    const sanitizedProps = useNativeInputA11y(
+      omitUnsupportedProps(
+        filterStylingProps(rest, overStyled),
+        UNSUPPORTED_PROPS,
+      ),
+      !!label,
     );
     const restRecord = sanitizedProps as Record<string, unknown>;
 

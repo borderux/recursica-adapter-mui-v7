@@ -38,6 +38,9 @@
     --recursica_ui-kit_components_modal_properties_border-radius
   );
   overflow: hidden;
+  background-color: var(
+    --recursica_ui-kit_components_modal_properties_colors_content-background-color
+  );
 }
 
 .content {
@@ -80,7 +83,9 @@
     var(
       --recursica_ui-kit_components_modal_properties_header-footer-horizontal-padding
     );
-  background-color: transparent; /* Inherit from content */
+  background-color: var(
+    --recursica_ui-kit_components_modal_properties_colors_header-background-color
+  );
 }
 
 .title {
@@ -209,7 +214,9 @@
     var(
       --recursica_ui-kit_components_modal_properties_header-footer-horizontal-padding
     );
-  background-color: transparent;
+  background-color: var(
+    --recursica_ui-kit_components_modal_properties_colors_footer-background-color
+  );
   display: flex;
   justify-content: flex-end;
   gap: var(--recursica_ui-kit_components_modal_properties_button-gap);

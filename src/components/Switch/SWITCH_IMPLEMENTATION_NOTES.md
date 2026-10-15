@@ -145,3 +145,7 @@ pattern, not a MUI-only bug). Fixed by not capping the group's control width at 
 switch's own label already wraps at 200px via `.labelWrapper`, so no group-level cap is needed.
 Verified live in both adapters: side-by-side now shows the label column at left with the
 switches beside it; stacked layout unaffected.
+
+### Accessible name lands on the native `<input>` (2026-10-15)
+
+`RequireAccessibleLabel` enforces a name at compile time (`label`, `aria-label` or `aria-labelledby`). MUI spreads unknown props onto the outer span, so `aria-label`/`aria-labelledby`/`aria-describedby` never reached the `<input>`, and a `label` with no `id` left `<label htmlFor>` unlinked. `useNativeInputA11y` (`src/utils`) moves the aria attributes to `slotProps.input` and generates an `id` for labelled controls. Same fix in Checkbox, Radio and Switch. Covered by `src/components/NativeInputA11y.dom.test.tsx`. Mantine already behaves this way natively and has the same test.
