@@ -24,7 +24,10 @@ import styles from "./Modal.module.css";
 import { type RecursicaModalProps } from "@recursica/adapter-common";
 
 export type ModalProps = RecursicaOverStyled<
-  Omit<MuiDialogProps, "size" | "radius" | "shadow" | "open"> &
+  Omit<
+    MuiDialogProps,
+    "size" | "radius" | "shadow" | "open" | "title" | "onClose"
+  > &
     RecursicaModalProps
 >;
 
@@ -48,10 +51,11 @@ const ModalRoot = forwardRef<HTMLDivElement, ModalProps>(function ModalRoot(
   {
     overStyled = false,
     opened = false,
-    withCloseButton = true,
     title,
     children,
     onClose,
+    closeButtonAriaLabel = "Close",
+    header,
     className,
     ...rest
   },
@@ -93,19 +97,18 @@ const ModalRoot = forwardRef<HTMLDivElement, ModalProps>(function ModalRoot(
         ((sanitizedProps as Record<string, unknown>).open as boolean) ||
         false
       }
-      onClose={onClose}
+      onClose={() => onClose()}
     >
-      {(title || withCloseButton) && (
+      {header ?? (
         <div className={styles.header}>
-          {title && <div className={styles.title}>{title}</div>}
-          {withCloseButton && (
-            <MuiIconButton
-              onClick={(e) => onClose?.(e, "backdropClick")}
-              className={styles.close}
-            >
-              <CloseIcon />
-            </MuiIconButton>
-          )}
+          <div className={styles.title}>{title}</div>
+          <MuiIconButton
+            aria-label={closeButtonAriaLabel}
+            onClick={() => onClose()}
+            className={styles.close}
+          >
+            <CloseIcon />
+          </MuiIconButton>
         </div>
       )}
       <ModalBody>{bodyChildren}</ModalBody>

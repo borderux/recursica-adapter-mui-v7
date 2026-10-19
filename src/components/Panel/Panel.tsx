@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef, type ReactNode } from "react";
+import { forwardRef, useEffect, useRef } from "react";
 import {
   Drawer as MuiDrawer,
   type DrawerProps as MuiDrawerProps,
@@ -29,6 +29,7 @@ export interface RecursicaPanelProps
       | "anchor"
       | "open"
       | "title"
+      | "onClose"
       | "variant"
       | "hideBackdrop"
       | "ModalProps"
@@ -40,12 +41,7 @@ export interface RecursicaPanelProps
       | "disableAutoFocus"
       | "disableRestoreFocus"
     >,
-    BaseRecursicaPanelProps {
-  /** Panel header title label. */
-  title?: ReactNode;
-  /** Whether to display the close button in the header. Default true. */
-  withCloseButton?: boolean;
-}
+    BaseRecursicaPanelProps {}
 
 export type PanelProps = RecursicaOverStyled<RecursicaPanelProps>;
 
@@ -75,11 +71,15 @@ const CloseIcon = () => (
  *
  * ```tsx
  * <Panel opened={opened} onClose={close} title="Panel Title" placement="right">
- *   <Panel.Body>
- *     Content goes here
- *   </Panel.Body>
+ *   Content goes here
+ *   <Panel.Footer>...</Panel.Footer>
  * </Panel>
  * ```
+ *
+ * The header is required and always rendered: `title` is required, and an icon-only Recursica
+ * Close button (`aria-label` "Close", overridable via `closeButtonAriaLabel`) calls the required
+ * `onClose`. The footer is optional. Passing `header` replaces the whole default header; avoid it,
+ * because then nothing guarantees the title or the Close button.
  *
  * Always non-modal, with no props to change it: the page behind stays usable
  * (no overlay, focus trap, scroll lock, `aria-modal` or `aria-hidden` on the
@@ -87,14 +87,7 @@ const CloseIcon = () => (
  * closes, and outside clicks never do. Implemented with MUI's `persistent`
  * Drawer variant (no Modal) plus an Escape listener and focus restoration.
  *
- * Mui Drawer sub-components available via dot-notation:
- * - `Panel.Header` — Top section with title and close button
- * - `Panel.Title` — Title text within the header
- * - `Panel.CloseButton` — Close button within the header
- * - `Panel.Body` — Scrollable body content area
- * - `Panel.Content` — Outer content container
- * - `Panel.Root` — Root element for advanced composition
- * - `Panel.Stack` — Stacked drawer context
+ * Only `Panel.Footer` is available as a sub-component.
  */
 const PanelBase = function Panel({
   overStyled = false,
@@ -103,8 +96,9 @@ const PanelBase = function Panel({
   wrapHeaderText = true,
   opened,
   title,
-  withCloseButton = true,
   onClose,
+  closeButtonAriaLabel = "Close",
+  header,
   children,
   ...rest
 }: PanelProps) {
@@ -120,10 +114,7 @@ const PanelBase = function Panel({
     openerRef.current = document.activeElement as HTMLElement | null;
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        onCloseRef.current?.(
-          e as unknown as React.SyntheticEvent,
-          "escapeKeyDown",
-        );
+        onCloseRef.current();
       }
     };
     document.addEventListener("keydown", onKeyDown);
@@ -171,25 +162,21 @@ const PanelBase = function Panel({
           }[placement]
         }`}
       >
-        {(title || withCloseButton) && (
+        {header ?? (
           <div className={styles.header}>
-            {title && (
-              <div
-                className={wrapHeaderText ? styles.titleTruncate : styles.title}
-              >
-                {title}
-              </div>
-            )}
-            {withCloseButton && (
-              <MuiIconButton
-                size="small"
-                aria-label="Close"
-                onClick={(e) => onClose?.(e, "backdropClick")}
-                className={styles.close}
-              >
-                <CloseIcon />
-              </MuiIconButton>
-            )}
+            <div
+              className={wrapHeaderText ? styles.titleTruncate : styles.title}
+            >
+              {title}
+            </div>
+            <MuiIconButton
+              size="small"
+              aria-label={closeButtonAriaLabel}
+              onClick={() => onClose()}
+              className={styles.close}
+            >
+              <CloseIcon />
+            </MuiIconButton>
           </div>
         )}
         <div className={styles.body}>{children}</div>

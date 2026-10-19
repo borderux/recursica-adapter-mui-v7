@@ -139,3 +139,13 @@ Project-wide fix; see Chip's `CHIP_IMPLEMENTATION_NOTES.md` for the original dis
 **Decision:** Panel is never modal, and there are no props to change that.
 
 **Implementation:** The house rule is that the page behind a panel stays usable. `Panel.tsx` always renders MUI's Drawer with `variant="persistent"` (after the caller's props), which has no Modal: no backdrop, no focus trap, no scroll lock, no `aria-modal`, and no `aria-hidden` on the rest of the page. Because there is no Modal, `Panel.tsx` supplies the rest itself: a document `keydown` listener (while open) calls `onClose` on Escape, and focus returns to the opener (the element focused at open) on close. Escape is independent of outside clicks and always closes the panel; clicking the page behind never does. `withOverlay` and MUI's `variant`, `hideBackdrop`, `ModalProps`, `BackdropProps`/`BackdropComponent` and `disable*` (escape, scroll lock, enforce focus, auto focus, restore focus) props are omitted from `RecursicaPanelProps`. Every adapter must match.
+
+---
+
+## 11. Required header with an always-present Close button (2026-10-16)
+
+**Decision:** Every Panel has a header with a required `title` and a Close button wired to a required `onClose`. The footer is optional. Matches mantine-v8.
+
+**Implementation:** The contract lives in `RecursicaPanelProps` in `@recursica/adapter-common` (^1.3.0). `Panel.tsx` renders the header div unless the discouraged `header` prop replaces it, and `withCloseButton` is removed. The Close button is MUI's `IconButton` with `aria-label="Close"` (or `closeButtonAriaLabel`), and `.close` now reuses Modal's Button text-variant, icon-only, small-size treatment (same as mantine-v8). `onClose` takes no arguments, so MUI's own `onClose` is omitted from the props type and the Escape listener calls `onClose()` directly.
+
+**Deviation:** Panel's goldens differ from mantine-v8's published ones until its updated Panel goldens are released.
