@@ -21,10 +21,6 @@ const meta: Meta = {
       control: "text",
       description: "Panel title displayed in the header.",
     },
-    withCloseButton: {
-      control: "boolean",
-      description: "Whether to display the close button in the header.",
-    },
     wrapHeaderText: {
       control: "boolean",
       description:
@@ -44,7 +40,7 @@ const meta: Meta = {
 The \`Panel\` component slides in or expands from the edge of the screen to reveal additional content or functionality. Built on Mui's \`Drawer\`, it enforces Recursica design tokens for styling.
 
 ### Anatomy
-1. **Header** — Title and close icon, remains fixed on scroll
+1. **Header** — Required title and an always-present Close button, remains fixed on scroll
 2. **Divider** — Separates header/footer from content
 3. **Body (Slot)** — Scrollable content area for custom content
 4. **Footer** — Fixed action buttons (Recursica-specific)
@@ -76,7 +72,6 @@ export const Default: Story = {
   args: {
     placement: "right",
     title: "Panel Title",
-    withCloseButton: true,
     wrapHeaderText: false,
   },
   render: ({ wrapHeaderText, ...args }: PanelStoryArgs) => {
@@ -117,7 +112,6 @@ export const LeftPlacement: Story = {
   args: {
     placement: "left",
     title: "Navigation",
-    withCloseButton: true,
     wrapHeaderText: false,
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -149,7 +143,6 @@ export const ScrollableContent: Story = {
   args: {
     placement: "right",
     title: "Scrollable Panel",
-    withCloseButton: true,
     wrapHeaderText: false,
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -191,7 +184,6 @@ export const LongTitle: Story = {
     placement: "right",
     title:
       "This is a ridiculously long panel title designed to test how the header CSS handles text overflow and whether it truncates correctly or breaks the layout",
-    withCloseButton: true,
     wrapHeaderText: true,
   },
   render: ({ ...args }: PanelStoryArgs) => {

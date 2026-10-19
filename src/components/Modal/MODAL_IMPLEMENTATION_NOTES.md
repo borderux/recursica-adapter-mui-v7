@@ -29,3 +29,7 @@ top of the container padding, which would double the offset otherwise.
 Residual: still a small width/horizontal-offset gap against mantine's golden after this fix
 (diffPixels dropped from ~172k to ~25k, still over the 2500 threshold) — not yet root-caused,
 see `OPEN_QUESTIONS.txt`.
+
+## Required header with an always-present Close button (2026-10-16)
+
+`title` and `onClose` are required (contract in `RecursicaModalProps`, `@recursica/adapter-common` ^1.3.0); `withCloseButton` is removed. `Modal.tsx` always renders the header div with the title and an `IconButton` Close (`aria-label="Close"`, or `closeButtonAriaLabel`) unless the discouraged `header` prop replaces it. `onClose` takes no arguments, so MUI's own `onClose` and `title` are omitted from the props type and the Dialog's `onClose` (Escape, backdrop click) is wrapped to call `onClose()`. Matches mantine-v8; the Close button now has an accessible name.
